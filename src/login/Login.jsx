@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
-import ReCAPTCHA from "react-google-recaptcha";
 import login from "../assets/login4.jpeg";
 import ReactivateModal from "./ReactivateModal";
 
@@ -13,9 +12,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", mdp: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [showReactivateModal, setShowReactivateModal] = useState(false);
-  const recaptchaRef = useRef();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -33,25 +30,15 @@ const Login = () => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
-  const handleRecaptchaChange = (token) => {
-    setRecaptchaToken(token);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
-    if (!recaptchaToken) {
-      setError("Veuillez vérifier que vous n'êtes pas un robot");
-      setLoading(false);
-      return;
-    }
-
     try {
       const response = await axios.post(
         "https://deploy-back-3.onrender.com/api/auth/login",
-        { ...formData, recaptchaToken }
+        formData
       );
       
       localStorage.setItem("token", response.data.token);
@@ -74,25 +61,10 @@ const Login = () => {
     setError("");
     
     try {
-      // Réinitialiser le ReCAPTCHA et attendre une nouvelle vérification
-      recaptchaRef.current.reset();
-      setRecaptchaToken("");
-
-      // Attendre la nouvelle vérification
-      const newRecaptchaToken = await new Promise((resolve) => {
-        const checkToken = setInterval(() => {
-          if (recaptchaToken) {
-            clearInterval(checkToken);
-            resolve(recaptchaToken);
-          }
-        }, 100);
-      });
-
       const response = await axios.post(
         "https://deploy-back-3.onrender.com/api/auth/login",
         { 
           ...formData,
-          recaptchaToken: newRecaptchaToken,
           reactivate: true 
         }
       );
@@ -111,10 +83,9 @@ const Login = () => {
   };
 
   const handleCancelReactivation = () => {
-    recaptchaRef.current.reset();
-    setRecaptchaToken("");
     setShowReactivateModal(false);
   };
+
   const handleOAuthRedirect = (provider) => {
     window.location.href = `https://deploy-back-3.onrender.com/api/auth/${provider}`;
   };
@@ -199,14 +170,6 @@ const Login = () => {
                 >
                   Mot de passe oublié ?
                 </Link>
-              </div>
-
-              <div className="mb-4" style={{ display: "flex", justifyContent: "center" }}>
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey="6LcwKU8rAAAAAJjUJZWml6BLLte83LdMQiXqPLr8"
-                  onChange={handleRecaptchaChange}
-                />
               </div>
 
               <motion.button
