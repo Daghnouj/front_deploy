@@ -204,7 +204,7 @@ const Login = () => {
               <div className="mb-4" style={{ display: "flex", justifyContent: "center" }}>
                 <ReCAPTCHA
                   ref={recaptchaRef}
-                  sitekey="6LeX4TIrAAAAALLiWyt9ea1qbrsodVjDP-4TYLrq"
+                  sitekey="6LeOIk8rAAAAAPaVomkwd572bcvZx9Ce59dOjbTd"
                   onChange={handleRecaptchaChange}
                 />
               </div>
