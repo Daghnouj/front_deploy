@@ -1,0 +1,55 @@
+.notification-backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+}
+
+.notification-dialog {
+  max-width: 600px; /* Increased from 450px */
+}
+  
+  .unread-notification {
+    background-color: #f8fbff;
+    border-left: 3px solid #1877f2 !important;
+  }
+  
+  .notification-dot {
+    width: 10px;
+    height: 10px;
+    border: 2px solid white;
+  }
+  
+  .notification-list::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .notification-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .pulse {
+    animation: pulse 1.5s infinite;
+  }
+  
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  
+  .highlight-target {
+    animation: highlight 2s ease-out;
+    background-color: rgba(255, 235, 59, 0.3);
+    border-left: 3px solid #ffd700;
+  }
+  .highlight-comment {
+    animation: highlight 2s ease-out;
+    background-color: rgba(13, 110, 253, 0.05);
+    border-left: 3px solid #0d6efd;
+  }
+  
+  @keyframes highlight {
+    from { background-color: rgba(13, 110, 253, 0.15); }
+    to { background-color: transparent; }
+  }

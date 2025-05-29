@@ -1,0 +1,316 @@
+:root {
+  --primary-blue: #b9d6fb;
+  --hover-blue: #79b3ff;
+  --background-gray: #f8f9fa;
+  --border-gray: #dadce0;
+  --text-primary: #3c4043;
+  --text-secondary: #adadad;
+  --today-color: #e8f0fe;
+  --event-bg: #e8f0fe;
+}
+
+/* Container général */
+.calendar-container {
+  max-width: 1400px;
+  margin: 1rem auto;
+  font-family: 'Roboto', sans-serif;
+  padding: 0 1rem;
+}
+
+/* Toolbar */
+.fc-header-toolbar {
+  padding: 16px 24px;
+  background: white;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.fc-toolbar-title {
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: var(--text-primary);
+  text-transform: capitalize;
+}
+
+.fc-button-primary {
+  background: transparent !important;
+  border: 1px solid var(--border-gray) !important;
+  color: var(--text-primary) !important;
+  text-transform: capitalize !important;
+  font-weight: 400 !important;
+  box-shadow: none !important;
+  border-radius: 4px !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+}
+
+.fc-button-active {
+  background: var(--background-gray) !important;
+}
+
+/* Jours */
+.fc-daygrid-day {
+  border-right: 1px solid var(--border-gray) !important;
+  border-bottom: 1px solid var(--border-gray) !important;
+  padding: 2px !important;
+}
+
+.fc-daygrid-day.fc-day-today {
+  background: var(--today-color) !important;
+}
+
+.fc-daygrid-day-number {
+  color: var(--text-secondary);
+  font-size: 10px !important;
+  padding: 2px !important;
+  margin: 0 !important;
+  text-decoration: none !important;
+}
+
+.fc-daygrid-day-frame {
+  min-height: 60px !important;
+  overflow: hidden !important;
+  padding: 2px !important;
+}
+
+/* Événements (vue mois) */
+.custom-event {
+  background: var(--primary-blue) !important;
+  border: none !important;
+  border-radius: 4px !important;
+  margin: 1px 2px !important;
+  padding: 1px 3px !important;
+  color: white !important;
+  cursor: pointer;
+  font-size: 10px !important;
+  height: auto !important;
+  line-height: 1.5;
+  overflow: hidden !important;
+  display: block !important;
+}
+
+.custom-event:hover {
+  background: var(--hover-blue) !important;
+}
+
+.event-time {
+  display: none !important;
+  
+}
+
+.event-title {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+}
+
+/* Vue horaire (timeGrid) - créneaux plus carrés */
+.fc-timegrid-slot {
+  height: 60px !important;  /* Ajuste la hauteur pour rendre la case carrée */
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.fc-timegrid-col {
+  border-right: 1px solid var(--border-gray);
+}
+
+.fc-timegrid-slot-label {
+  padding: 0 8px !important;
+  font-size: 10px !important;
+  color: var(--text-secondary);
+  line-height: 60px; /* Aligner le texte au centre de la case carrée */
+}
+
+.fc-timegrid-now-indicator-line {
+  border-top: 2px solid var(--primary-blue);
+}
+
+.fc-timegrid-event {
+  border-radius: 4px !important;
+  margin: 1px !important;
+  padding: 2px 4px !important;
+  font-size: 10px !important;
+  height: auto !important;
+  background-color: var(--primary-blue) !important;
+  color: white !important;
+  overflow: hidden;
+}
+
+.fc-timegrid-event:hover {
+  background-color: var(--hover-blue) !important;
+}
+
+.fc-timegrid-slots {
+  background: white;
+}
+
+/* ---------- Modifications pour créneaux strictement carrés ---------- */
+.fc-timegrid-col {
+  width: 60px !important;    /* même valeur que height */
+}
+
+/* ---------- Date sous le titre et titre non gras ---------- */
+.custom-event {
+  display: flex !important;
+  flex-direction: column !important;  /* empile titre / date */
+  align-items: flex-start !important;
+  font-weight: 400 !important;         /* désactivation du gras global */
+}
+
+.custom-event .event-title {
+  font-weight: 400 !important;         /* titre non gras */
+  white-space: normal !important;
+  margin-bottom: 2px !important;
+}
+
+.custom-event .event-date {
+  font-size: 9px !important;
+  font-weight: 400 !important;
+  color: var(--text-secondary) !important;
+}
+
+/* Date sous le titre dans la vue détaillée (timeGridEvent) */
+.fc-timegrid-event .fc-event-title {
+  display: block !important;
+  font-weight: 400 !important;
+}
+.fc-timegrid-event .fc-event-time {
+  display: block !important;
+  font-size: 9px !important;
+  color: var(--text-secondary) !important;
+  margin-top: 2px !important;
+}
+
+/* Modal - Google Style */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  max-width: 90%;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-header {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-gray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.modal-close {
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--text-secondary);
+  border: none;
+  background: none;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  color: var(--text-secondary);
+  font-size: 14px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--primary-blue);
+  outline: none;
+  box-shadow: 0 0 0 2px #e8f0fe;
+}
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-gray);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.google-button {
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+}
+
+.primary-button {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.primary-button:hover {
+  background: var(--hover-blue);
+}
+
+.secondary-button {
+  background: transparent;
+  color: var(--primary-blue);
+}
+
+.delete-button {
+  background: #d93025;
+  color: white;
+  margin-right: auto;
+}
+
+.delete-button:hover {
+  background: #b3141b;
+}
+
+.error-message {
+  color: #d93025;
+  background: #fce8e6;
+  padding: 12px;
+  margin: 16px 0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}

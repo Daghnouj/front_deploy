@@ -1,0 +1,511 @@
+/* ProfessionalProfile.css */
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --background: #d7e4f0;
+  --card-bg: #ffffff;
+  --border-radius: 12px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes borderPulse {
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+/* Base Styles */
+.proprofile-container {
+  max-width: 1200px;
+  margin: 90px auto 2rem;
+  padding: 0 1.5rem;
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  color: var(--text-primary);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.proprofile-header-section {
+  background: var(--background);
+  border-radius: var(--border-radius);
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow);
+  animation: pulse 1.5s ease-in-out;
+}
+
+.proprofile-header {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.proprofile-image-wrapper {
+  position: relative;
+  flex-shrink: 0;
+  animation: float 6s ease-in-out infinite;
+}
+
+.proprofile-image {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--card-bg);
+  box-shadow: 0 0 0 4px var(--primary), var(--shadow);
+  animation: borderPulse 3s infinite;
+}
+
+.proprofile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.proprofile-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+.proprofile-name {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.proprofile-name::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+  animation: slideInRight 0.6s ease-out 0.4s both;
+}
+
+.proprofile-specialty {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 1.5rem 0 1rem;
+  position: relative;
+  padding-left: 2.5rem;
+}
+
+.proprofile-specialty::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2rem;
+  height: 2px;
+  background: var(--primary);
+  transition: width 0.5s ease;
+}
+
+.proprofile-specialty:hover::before {
+  width: 3rem;
+}
+
+.proprofile-location {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin: 0;
+  animation: fadeIn 0.8s ease-out 0.4s both;
+}
+
+.proprofile-book-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.proprofile-book-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+}
+
+.proprofile-book-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.4);
+}
+
+.proprofile-book-btn:hover::before {
+  transform: rotate(45deg) translate(25%, 25%);
+}
+
+.proprofile-book-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.proprofile-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2.5rem;
+  animation: fadeIn 0.8s ease-out 0.3s both;
+}
+
+.proprofile-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.proprofile-card {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.proprofile-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.proprofile-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 1.8rem;
+  color: var(--text-primary);
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.proprofile-card-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.proprofile-card:hover .proprofile-card-title::after {
+  width: 60px;
+}
+
+.proprofile-contact-item,
+.proprofile-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  transition: transform 0.3s ease;
+}
+
+.proprofile-contact-item:hover,
+.proprofile-detail-item:hover {
+  transform: translateX(5px);
+}
+
+.proprofile-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  fill: var(--primary);
+  transition: transform 0.3s ease;
+}
+
+.proprofile-contact-item:hover .proprofile-icon,
+.proprofile-detail-item:hover .proprofile-icon {
+  transform: scale(1.2);
+}
+
+.proprofile-right-col {
+  background: var(--card-bg);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.proprofile-right-col:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.proprofile-section-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.8rem;
+  margin-top: 0;
+  margin-bottom: 1.8rem;
+  color: var(--text-primary);
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.proprofile-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.proprofile-right-col:hover .proprofile-section-title::after {
+  width: 80px;
+}
+
+.proprofile-bio {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 2.5rem;
+  white-space: pre-line;
+  transition: all 0.4s ease;
+}
+
+.proprofile-right-col:hover .proprofile-bio {
+  color: var(--text-primary);
+}
+
+.proprofile-services-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.proprofile-service-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.2rem 1.5rem;
+  background: var(--background);
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  transition: var(--transition);
+  border-left: 3px solid var(--primary);
+  animation: fadeIn 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.proprofile-service-item:nth-child(1) { animation-delay: 0.1s; }
+.proprofile-service-item:nth-child(2) { animation-delay: 0.2s; }
+.proprofile-service-item:nth-child(3) { animation-delay: 0.3s; }
+.proprofile-service-item:nth-child(4) { animation-delay: 0.4s; }
+.proprofile-service-item:nth-child(5) { animation-delay: 0.5s; }
+
+.proprofile-service-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-left-width: 5px;
+}
+
+/* Loading & Error States */
+.proprofile-loading,
+.proprofile-error,
+.proprofile-not-found {
+  text-align: center;
+  padding: 4rem;
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  max-width: 600px;
+  margin: 5rem auto;
+  animation: fadeIn 0.8s ease;
+}
+
+/* Loading spinner */
+.proprofile-loading::before {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--background);
+  border-top: 5px solid var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .proprofile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .proprofile-info-header {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center; /* Centrer horizontalement */
+  }
+  
+  .proprofile-specialty {
+    padding-left: 0;
+    text-align: center;
+    margin-top: 0.5rem; /* Ajustement de marge */
+  }
+  
+  .proprofile-specialty::before {
+    display: none;
+  }
+  
+  .proprofile-location {
+    justify-content: center;
+    margin-top: 0.5rem; /* Ajustement de marge */
+  }
+
+  .proprofile-name::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Centrer le bouton */
+  .proprofile-book-btn {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .proprofile-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .proprofile-header-section {
+    padding: 1.8rem;
+  }
+  
+  .proprofile-image {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .proprofile-name {
+    font-size: 2.2rem;
+  }
+  
+  .proprofile-book-btn {
+    width: 100%;
+    padding: 1rem;
+    text-align: center; /* Centrer le texte */
+    display: flex; /* Assurer un centrage parfait */
+    justify-content: center; /* Centrage horizontal */
+  }
+  
+  /* Ajustements pour un meilleur centrage */
+  .proprofile-info-header {
+    width: 100%;
+  }
+  
+  .proprofile-name {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .proprofile-container {
+    padding: 0 1rem;
+  }
+  
+  .proprofile-card,
+  .proprofile-right-col {
+    padding: 1.5rem;
+  }
+  
+  .proprofile-name {
+    font-size: 1.8rem;
+  }
+  
+  .proprofile-specialty {
+    font-size: 1.2rem;
+  }
+  
+  /* Centrage amélioré pour mobile */
+  .proprofile-book-btn {
+    margin-top: 1.5rem;
+  }
+}

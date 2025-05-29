@@ -1,0 +1,181 @@
+/* CommentModal.css */
+/* Styles généraux du modal */
+.comment-dialog {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: calc(100% - 1rem) !important;
+}
+
+.comment-dialog .modal-content {
+  border-radius: 15px;
+  transform: translateY(0) !important;
+  top: 0 !important;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* En-tête du modal */
+.comment-dialog .modal-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem 1.5rem;
+}
+
+.comment-dialog .modal-title {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+/* Corps du modal */
+.comment-dialog .modal-body {
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Liste des commentaires */
+.comment-list {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.comment-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.comment-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.comment-list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+/* Styles spécifiques Facebook */
+.facebook-modal .modal-header {
+  background-color: #f0f2f5;
+  border-bottom: 1px solid #dddfe2;
+}
+
+.facebook-modal .form-control {
+  border-radius: 20px;
+  padding: 8px 15px;
+  border: 1px solid #dddfe2;
+}
+
+.facebook-modal .btn-primary {
+  background-color: #1877f2;
+  border-color: #1877f2;
+  font-weight: 600;
+}
+
+/* Interactions */
+.hover-primary:hover {
+  color: #1877f2 !important;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.hover-danger:hover {
+  color: #dc3545 !important;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+/* Éditeur de commentaire */
+.comment-editor {
+  border-top: 1px solid #dee2e6;
+  background: #fff;
+  padding: 1.5rem;
+}
+
+.emoji-picker-container {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  margin-bottom: 10px;
+  z-index: 1000;
+}
+
+/* Réponses */
+.reply-container {
+  margin-left: 2.5rem;
+  position: relative;
+}
+
+.reply-container::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #e9ecef;
+}
+
+/* Images de profil */
+.profile-image {
+  object-fit: cover;
+  min-width: 40px;
+  min-height: 40px;
+  background-color: #f0f2f5;
+}
+
+/* Animations */
+.highlight-target {
+  animation: highlight-fade 2s ease-out;
+}
+
+@keyframes highlight-fade {
+  0% { background-color: rgba(24, 119, 242, 0.2); }
+  100% { background-color: transparent; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .comment-dialog {
+    max-width: 95% !important;
+    margin: 0.5rem auto !important;
+  }
+  
+  .reply-container {
+    margin-left: 1rem;
+  }
+  
+  .reply-container::before {
+    left: -0.75rem;
+  }
+  
+  .profile-image {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .comment-dialog .modal-content {
+    max-height: 85vh;
+  }
+}
+
+@media (max-width: 576px) {
+  .comment-dialog .modal-header {
+    padding: 0.75rem;
+  }
+  
+  .comment-editor {
+    padding: 1rem;
+  }
+  
+  .emoji-picker-container {
+    right: -10px;
+    transform: scale(0.9);
+  }
+}

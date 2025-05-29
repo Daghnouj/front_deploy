@@ -1,0 +1,25 @@
+.accordion-item {
+    border: none !important;
+  }
+  
+  .accordion-button {
+    color: black;
+    font-weight: bold;
+    border: none;
+    box-shadow: none;
+  }
+  
+ 
+  
+  .accordion-body {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  hr {
+    margin: 10px 0;
+    border: none;
+    height: 1px;
+    background: #ddd;
+  }
+  

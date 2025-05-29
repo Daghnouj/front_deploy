@@ -1,0 +1,124 @@
+.messageInputContainer {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  padding: 1rem;
+  border-top: 1px solid #e0e7ff;
+  position: relative;
+}
+
+.inputForm {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.inputWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.messageInput {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 2.5rem;
+  border: 1px solid #c7d2fe;
+  background: #f0f4ff;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  color: #1e293b;
+  padding-right: 5rem;
+}
+
+.messageInput:focus {
+  outline: none;
+  border-color: #6366f1;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.inputActions {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 0.75rem;
+}
+
+.emojiBtn, .imageBtn {
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: #2563eb;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.emojiBtn:hover, .imageBtn:hover {
+  background: #dbeafe;
+  transform: scale(1.05);
+}
+
+.sendBtn {
+  padding: 0.9rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.2);
+}
+
+.sendBtn:hover:not(:disabled) {
+  transform: scale(1.08);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.sendBtn:disabled {
+  background: #94a3b8;
+  box-shadow: none;
+}
+
+.emojiPicker {
+  position: absolute;
+  bottom: 5.5rem;
+  right: 1rem;
+  z-index: 100;
+  border-radius: 1rem;
+  border: 1px solid #e0e7ff;
+  overflow: hidden;
+  animation: slideUp 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from {
+      transform: translateY(20px);
+      opacity: 0;
+  }
+  to {
+      transform: translateY(0);
+      opacity: 1;
+  }
+}
+
+.icon {
+  width: 1.4rem;
+  height: 1.4rem;
+  stroke-width: 1.8;
+  stroke: #4f46e5;
+}
+
+.sendIcon {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+/* Suppression des styles liés aux images */
+.imagePreview,
+.previewImage,
+.previewCloseBtn {
+  display: none;
+}

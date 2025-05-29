@@ -1,0 +1,162 @@
+/* Filter Section Styles */
+.form-select.border-dark.rounded-5 {
+    border-radius: 25px !important;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+}
+
+.form-control.border-dark.rounded-5 {
+    border-radius: 25px !important;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+}
+
+/* Individual Professional Card */
+.professional-card {
+    width: 100%;
+    /* REMOVED fixed height */
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+}
+
+.professional-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Image Section */
+.professional-image {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-bottom: 2px solid #eee;
+}
+
+/* Card Information Section */
+.card-info {
+    padding: 15px 20px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-info h5 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none !important;
+}
+
+.specialty {
+    color: #007bff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none !important;
+}
+
+.location {
+    color: #000000;
+    font-size: 0.9rem;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    line-height: 1.4;
+    text-decoration: none !important;
+}
+
+.location::before {
+    font-size: 0.9em;
+    margin-right: 3px;
+}
+
+/* Book Button Styles */
+.book-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: fit-content;
+    /* Adjusted margins for better positioning */
+    margin: 15px auto 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    /* Ensure button is always above other content */
+    position: relative;
+    z-index: 1;
+}
+
+.book-button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .professional-card {
+        /* REMOVED fixed height */
+    }
+    
+    .professional-image {
+        height: 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .col-3 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    .professional-card {
+        /* REMOVED fixed height */
+    }
+}
+
+@media (max-width: 768px) {
+    .col-3 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .professional-card {
+        /* REMOVED fixed height and max-width */
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .professional-image {
+        height: 300px;
+    }
+    
+    .form-select.border-dark.rounded-5,
+    .form-control.border-dark.rounded-5 {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .col-3.offset-3 {
+        margin-left: 0;
+    }
+}

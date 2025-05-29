@@ -1,0 +1,290 @@
+.custom-img {
+  max-width: 100%;
+  height: auto;
+}
+
+.sidebar-section {
+  background-color: #FFE57D;
+  text-align: center;
+}
+
+.st{
+  position: sticky;
+  top: 100px;
+}
+
+
+.add-post-btn {
+  background-color: #FFFFFF;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+.divider {
+  border-top: 1px solid black;
+  margin: 8px 0;
+}
+
+.search-bar {
+  background-color: #e0e0e0;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+.posts-container {
+  overflow: hidden;
+}
+
+
+
+.posts-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.posts-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.posts-scrollable::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.posts-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .custom-img {
+    max-width: 100%;
+  }
+}
+
+/* Modal styles */
+.modal-content {
+  border-radius: 15px;
+}
+
+.modal-body textarea {
+  resize: none;
+}
+
+
+
+.facebook-modal .modal-header {
+  background-color: #f0f2f5;
+  border-bottom: 1px solid #dddfe2;
+}
+
+.facebook-modal .modal-content {
+  border-radius: 12px;
+}
+
+.facebook-modal .form-control {
+  border-radius: 20px;
+  padding: 8px 15px;
+}
+
+.facebook-modal .btn-primaryy {
+  background-color: #1877f2;
+  border-color: #1877f2;
+}
+
+.facebook-modal .modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.facebook-modal .modal-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.facebook-modal .modal-body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.facebook-modal .btn-link:hover {
+  text-decoration: none;
+}
+
+/* Hover styles */
+.hover-primary:hover {
+  color: #1877f2 !important;
+  cursor: pointer;
+}
+
+.hover-danger:hover {
+  color: #dc3545 !important;
+  cursor: pointer;
+}
+
+/* Badge */
+.badge-sm {
+  font-size: 0.75em;
+  padding: 0.25em 0.4em;
+}
+
+/* Notifications */
+.notification-item {
+  padding: 1rem;
+  transition: background-color 0.3s ease;
+  border-bottom: 1px solid #eee;
+}
+
+.notification-item:hover {
+  background-color: #f8f9fa !important;
+  cursor: pointer;
+}
+
+.notification-item.unread {
+  background-color: #f8f9fa;
+  border-left: 3px solid #0d6efd;
+  font-weight: 500;
+}
+
+.notification-time {
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+.notification-message {
+  margin: 0.5rem 0;
+}
+
+.notification-modal {
+  max-height: 80vh;
+}
+
+.notification-modal .unread {
+  background-color: #f0f2f5;
+}
+
+.notification-modal .modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.unread-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.mark-as-read .circle-hover {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #ced0d4;
+  transition: all 0.2s;
+}
+
+.mark-as-read:hover .circle-hover {
+  border-color: #1877f2;
+  background-color: #e7f3ff;
+}
+
+.mark-as-read:hover .circle-hover::after {
+  content: '✓';
+  color: #1877f2;
+  font-size: 12px;
+  position: relative;
+  left: 4px;
+  top: -1px;
+}
+/* Community.css */
+.user-hover-card {
+  position: absolute;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 220px;
+  pointer-events: auto;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.user-hover-card::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid white;
+  filter: drop-shadow(-2px 0 1px rgba(0,0,0,0.1));
+}
+
+.user-hover-card img {
+  flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.user-hover-card button {
+  transition: transform 0.1s ease;
+  background-color: #1877f2;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.user-hover-card button:hover {
+  background-color: #166fe5;
+}
+
+.user-hover-card button:active {
+  transform: scale(0.95);
+}
+
+.hashtag-item {
+  transition: all 0.2s ease;
+}
+
+.hashtag-item:hover {
+  opacity: 0.9;
+  transform: translateX(5px);
+}
+
+.posts-scrollable::-webkit-scrollbar {
+  width: 20px;
+}
+
+.posts-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.posts-scrollable::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.custom-img {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.sidebar-section {
+  background-color: #FFE57D;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.add-post-btn {
+  transition: transform 0.2s;
+}
+
+.add-post-btn:hover {
+  transform: translateY(-2px);
+}

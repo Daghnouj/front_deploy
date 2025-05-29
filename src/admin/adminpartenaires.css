@@ -1,0 +1,58 @@
+/* adminpartenaires.css */
+
+.partners-container {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+
+.partner-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 2px solid #e9ecef;
+  padding: 5px;
+}
+
+.partner-logo-lg {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 50%;
+  border: 3px solid #e9ecef;
+  padding: 5px;
+}
+
+.partner-info li {
+  margin-bottom: 8px;
+  color: #6c757d;
+}
+
+
+
+
+.invalid-feedback {
+  color: #e74c3c;
+  font-size: 0.9em;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #3498db;
+  border-color: #3498db;
+}
+
+
+@media (max-width: 768px) {
+  .partners-container {
+    padding: 15px;
+  }
+  
+ 
+  
+  .partner-logo {
+    width: 60px;
+    height: 60px;
+  }
+}

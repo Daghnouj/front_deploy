@@ -1,0 +1,54 @@
+.events-container {
+  padding: 50px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.section-titlee {
+  margin-top: 80px;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 80px;
+}
+
+.event-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 700px;
+}
+
+.event-home-title {
+  
+  font-size: 46px;
+  font-weight: bold;
+}
+
+.event-text {
+font-size: 20px;
+
+}
+
+.event-image {
+  width: 533px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 70px;
+}
+
+.explore-btn {
+  background-color: #2A63F6;
+  color: white;
+  padding: 12px 24px;
+  font-size: 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 48px;
+  margin-bottom: 33px;
+}
+
+.explore-btn:hover {
+  background-color: #1a4bd6;
+}
+

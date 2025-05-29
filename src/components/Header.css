@@ -1,0 +1,139 @@
+.navbar {
+  background-color: #ffffff !important;
+  padding: 10px 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Unified Dropdown Styling */
+.nav-item.dropdown .dropdown-menu {
+  margin-top: 12px;
+  border: 1px solid #e0e0e0;
+  min-width: 220px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform-origin: top center;
+  animation: fadeIn 0.2s ease-out;
+  padding: 8px 0;
+}
+
+.nav-item.dropdown .dropdown-toggle {
+  position: relative;
+  padding-right: 28px !important;
+  
+  font-weight: 500;
+}
+
+.nav-item.dropdown .dropdown-toggle::after {
+  content: "";
+  border: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #666;
+  transition: transform 0.2s ease;
+}
+
+.nav-item.dropdown.show .dropdown-toggle::after {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.nav-item.dropdown .dropdown-item {
+  font-size: 1rem;
+  padding: 10px 20px;
+  color: #444;
+  transition: all 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-item.dropdown .dropdown-item:hover,
+.nav-item.dropdown .dropdown-item:focus {
+  background-color: #f8faff;
+  color: #457AFF;
+  padding-left: 25px;
+}
+
+.nav-item.dropdown .dropdown-item.active {
+  background-color: #457AFF;
+  color: white !important;
+  font-weight: 500;
+}
+
+.nav-item.dropdown .dropdown-item.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #3457D5;
+}
+
+/* Navbar Links */
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  color: #333 !important;
+  margin-right: 12px;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-link.active {
+  color: #457AFF !important;
+}
+
+/* Separator */
+.nav-item.separator {
+  border-left: 1px solid #dee2e6;
+  height: 30px;
+  margin: 0 1rem;
+  align-self: center;
+}
+
+/* Mobile adjustments */
+@media (max-width: 991.98px) {
+  .nav-item.dropdown .dropdown-menu {
+    margin-top: 0;
+    border: none;
+    box-shadow: none;
+    background-color: #f8f9fa;
+    min-width: auto;
+  }
+  
+  .nav-item.dropdown .dropdown-item {
+    padding: 8px 15px;
+  }
+  
+  .nav-item.dropdown .dropdown-toggle::after {
+    right: 15px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Login/Register Button */
+.btn-primary {
+  background-color: #457AFF;
+  border-color: #457AFF;
+  padding: 8px 20px;
+  border-radius: 8px;
+}
+
+.btn-primary:hover {
+  background-color: #3457D5;
+  border-color: #3457D5;
+}

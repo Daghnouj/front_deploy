@@ -1,0 +1,76 @@
+/* General Section Styling */
+.contact-section {
+  background: #f8f9fa; /* Light background to separate section */
+  padding: 60px 0; /* Add spacing above and below */
+}
+
+.contact-intro {
+  margin-bottom: 20px; /* Space between title and form */
+}
+
+/* Contact Form Styling */
+.contact-form {
+  background: transparent;
+  padding: 40px;
+  border-radius: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  background: #d3d3d3;
+  border: none;
+  border-radius: 25px;
+  width: 300px;
+  padding: 12px;
+  padding-left: 33px ;
+
+}
+
+
+
+.contact-form textarea {
+  border-radius: 15px;
+  resize: none;
+}
+
+
+
+/* Button Styling */
+.contact-btn {
+  background: #ffd966;
+  border: none;
+  border-radius: 25px;
+  padding: 15px ;
+  width: 110px;
+  transition: background 0.3s;
+}
+
+
+
+.contact-btn:hover {
+  background: #000000;
+}
+
+/* Contact Info Card Styling */
+.contact-card {
+  background: #ffd966;
+  border-radius: 37px;
+  padding: 15px;
+  width: 80%;
+  max-width: 300px;
+  text-align: start;
+  margin: auto;
+  height: 340px;
+}
+
+.contact-card p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.contact-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}

@@ -1,0 +1,47 @@
+.therapist-section {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text for contrast */
+    padding: 60px 0; /* Adds vertical spacing */
+  }
+  
+  .therapist-section .col-lg-6 {
+    padding: 20px;
+  }
+  
+  .therapist-section h2 {
+    max-width: 500px;
+    font-size: 46px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  .therapist-section p {
+    font-size: 19px;
+    line-height: 1.6;
+    width: 25.1em;
+  }
+
+  .book-now-btn {
+    background-color: #FF8D50;
+    color: white;
+    width: 397px;
+    height: 69px;
+    font-size: 24px;  /* Adjust text size */
+    border: none;
+    border-radius: 234px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  @media (max-width: 768px) {
+    .therapist-section p {
+      width: 20.1em;
+    }
+
+    .book-now-btn {
+      
+      width: 343px;
+    }
+    
+  }
+  

@@ -1,0 +1,280 @@
+:root {
+  --primary: #457AFF;
+  --secondary: #FF90BC;
+  --success: #4CAF50;
+  --danger: #FF5252;
+  --warning: #F5A146;
+  --text-dark: #2d3748;
+  --text-light: #ffffff;
+  --muted: #718096;
+  --background: #F7FAFC;
+  --border: #E2E8F0;
+}
+
+/* Base Styles */
+* {
+
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.schedule-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* Header Styles */
+.schedule-header {
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.schedule-title {
+  color: var(--text-dark);
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.title-icon {
+  margin-right: 1rem;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+/* Card Styles */
+.schedule-card {
+  background: var(--text-light);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.schedule-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px -1px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-light);
+}
+
+.bg-primary { background: var(--primary); }
+.bg-secondary { background: var(--secondary); }
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-icon {
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.card-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.status-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Table Styles */
+.table-container {
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 600px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.schedule-table th {
+  background: var(--background);
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.schedule-table tr:hover {
+  background: rgba(69, 122, 255, 0.03);
+}
+
+/* Status Styles */
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  width: fit-content;
+}
+
+.status-icon {
+  font-size: 1.2rem;
+}
+
+.status-pending { 
+  background: rgba(245, 161, 70, 0.1); 
+  color: var(--warning);
+}
+
+.status-approved { 
+  background: rgba(69, 122, 255, 0.1); 
+  color: var(--primary);
+}
+
+.status-cancelled { 
+  background: rgba(255, 82, 82, 0.1); 
+  color: var(--danger);
+}
+
+.status-completed { 
+  background: rgba(76, 175, 80, 0.1); 
+  color: var(--success);
+}
+
+
+.btn-approve {
+  background: var(--primary);
+  color: var(--text-light);
+}
+
+.btn-approve:hover {
+  background: #3560cc;
+}
+
+.btn-cancel {
+  background: var(--danger);
+  color: var(--text-light);
+}
+
+.btn-cancel:hover {
+  background: #cc4242;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Empty State Styles */
+.empty-state {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem;
+}
+
+.empty-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .schedule-container {
+    padding: 1rem;
+  }
+
+  .schedule-title {
+    font-size: 1.6rem;
+  }
+
+  .header-content {
+    gap: 1rem;
+  }
+
+  .header-icon {
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .status-badge {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .schedule-table {
+    min-width: unset;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .btn-approve {
+    width: 100%;
+    justify-content: center;
+  }
+  .btn-cancel {
+    width: 100%;
+    justify-content: center;
+  }
+
+
+  .schedule-table th,
+  .schedule-table td {
+    padding: 0.8rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .status-badge {
+    align-self: flex-start;
+  }
+}

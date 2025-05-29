@@ -1,0 +1,84 @@
+/* Custom Overview Styles */
+.admii-overview-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.admii-header {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.admii-stat-card {
+  border: none;
+  border-radius: 15px;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.admii-stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.admii-icon-container {
+  background-color: #0d6efd;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.admii-stat-title {
+  color: #6c757d;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.admii-stat-value {
+  color: #2c3e50;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.admii-activity-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admii-activity-header {
+  background-color: white;
+  border-bottom: 2px solid #dee2e6;
+  padding: 1.25rem;
+  border-radius: 15px 15px 0 0;
+}
+
+.admii-activity-table {
+  margin-bottom: 0;
+}
+
+.admii-table-header {
+  color: #495057;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.admii-table-data {
+  vertical-align: middle;
+  color: #2c3e50;
+}
+
+.admii-status-badge {
+  padding: 0.5em 0.75em;
+  border-radius: 20px;
+  font-weight: 500;
+}
+

@@ -1,0 +1,214 @@
+:root {
+  --admindash-primary: #4f46e5;
+  --admindash-secondary: #6366f1;
+  --admindash-accent: #818cf8;
+  --admindash-bg: #f8fafc;
+  --admindash-text: #1e293b;
+  --admindash-border: #e2e8f0;
+}
+
+.admindash-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--admindash-bg);
+  position: relative;
+}
+
+/* Sidebar Styles */
+.admindash-sidebar {
+  width: 280px;
+  background: #ffffff;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  left: 0px;
+  top: 0;
+  bottom: 0;
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.admindash-sidebar.admindash-visible {
+  left: 0;
+}
+
+.admindash-sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.admindash-sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--admindash-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admindash-sidebar-header h3 {
+  color: var(--admindash-primary);
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.admindash-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: #64748b;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.25rem;
+}
+
+.admindash-close-btn:hover {
+  color: var(--admindash-primary);
+}
+
+/* Navigation Styles */
+.admindash-sidebar-nav {
+  padding: 1rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.admindash-sidebar-nav a {
+  display: flex;
+  align-items: center;
+  padding: 0.875rem 1rem;
+  margin: 0.375rem 0;
+  border-radius: 8px;
+  color: var(--admindash-text);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.admindash-sidebar-nav a:hover {
+  background-color: #f1f5f9;
+}
+
+.admindash-sidebar-nav a.active {
+  background-color: var(--admindash-primary);
+  color: #ffffff;
+}
+
+.admindash-nav-icon {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  width: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Footer & Logout Styles */
+.admindash-sidebar-footer {
+  margin-top: auto;
+  padding: 1.5rem;
+  border-top: 1px solid var(--admindash-border);
+}
+
+.admindash-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.875rem;
+  background-color: var(--admindash-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.admindash-logout-btn:hover {
+  background-color: var(--admindash-secondary);
+}
+
+/* Main Content Styles */
+.admindash-main {
+  flex-grow: 1;
+  margin-left: 280px;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.admindash-content-area {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Mobile Menu Toggle */
+.admindash-menu-toggle {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background-color: var(--admindash-primary);
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 999;
+  display: none;
+  transition: all 0.2s ease;
+}
+
+.admindash-menu-toggle:hover {
+  background-color: var(--admindash-secondary);
+}
+
+/* Overlay Styles */
+.admindash-sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 998;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admindash-main {
+    margin-left: 0;
+    padding: 1.5rem;
+  }
+
+  .admindash-menu-toggle {
+    display: block;
+  }
+
+  .admindash-sidebar {
+    width: 260px;
+    left: -280px;
+  }
+
+  .admindash-sidebar.admindash-visible {
+    left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .admindash-main {
+    padding: 1rem;
+  }
+
+  .admindash-sidebar-header {
+    padding: 1rem;
+  }
+
+  .admindash-sidebar-nav {
+    padding: 0.75rem;
+  }
+
+  .admindash-sidebar-nav a {
+    padding: 0.75rem;
+  }
+}

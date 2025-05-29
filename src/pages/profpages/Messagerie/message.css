@@ -1,0 +1,86 @@
+/* styles.css */
+@keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.2s ease-out;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  .message-bubble-right:after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    background: inherit;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+  }
+  
+  .message-bubble-left:after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    bottom: 0;
+    width: 12px;
+    height: 12px;
+    background: inherit;
+    clip-path: polygon(0 0, 0 100%, 100% 0);
+  }
+  
+  .bg-blue-500.message-bubble-right:after {
+    background: #3b82f6;
+  }
+  
+  .bg-white.message-bubble-left:after {
+    background: white;
+  }
+  /* styles.css */
+.shadow-message-input {
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.03);
+  }
+  
+  .animate-fade-in-up {
+    animation: fade-in-up 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+  

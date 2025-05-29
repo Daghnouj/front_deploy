@@ -1,0 +1,28 @@
+.post-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .favorites-modal .modal-body {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+  }
+
+  .delete-icon {
+    transition: transform 0.2s, opacity 0.2s;
+    opacity: 0.7;
+  }
+  
+  .delete-icon:hover {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  
+  .post-card:hover .delete-icon {
+    opacity: 1;
+  }

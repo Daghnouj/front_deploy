@@ -1,0 +1,377 @@
+/* SportsRooms.css */
+:root {
+  --sports-primary: #1A4567;
+  --sports-secondary: #5C8BA3;
+  --sports-accent: #FF6B35;
+  --sports-light: #F4F9FC;
+  --sports-text: #2D3B45;
+}
+
+/* Base Styles */
+.sports-facilities-container {
+  color: var(--sports-text);
+}
+
+/* Hero Banner */
+.sports-banner {
+  position: relative;
+  background: url('/images/sports-banner.jpg') center/cover;
+  min-height: 297px;
+  margin-bottom: 3rem;
+}
+
+.sports-banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #20BC6B;
+  display: flex;
+  align-items: center;
+}
+
+.sports-banner-title {
+  color: #F4F9FC;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Main Content */
+.sports-main-content {
+  padding: 4rem 0;
+}
+
+
+/* Room Cards */
+.sports-rooms-grid {
+  margin-top: 2rem;
+}
+
+.sports-room-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+  height: 100%;
+}
+
+.sports-room-card:hover {
+  transform: translateY(-5px);
+}
+
+.sports-room-image-container {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.sports-room-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.sports-room-image:hover {
+  transform: scale(1.05);
+}
+
+.sports-room-info {
+  padding: 1.5rem;
+}
+
+.sports-room-name {
+  color: var(--sports-primary);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.sports-room-address {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--sports-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.sports-address-icon {
+  font-size: 1.2rem;
+  color: var(--sports-accent);
+}
+
+/* Compact Activities Section */
+.sports-room-activities {
+  margin: 0.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.sports-activities-scroller {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #4FB2E5;
+  padding-bottom: 2px;
+}
+
+.sports-activity-badge {
+  flex: 0 0 auto;
+  background: var(--sports-light);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(92, 139, 163, 0.15);
+}
+
+.sports-activity-bullet {
+  font-size: 0.5rem;
+  color: var(--sports-accent);
+  margin-right: 0.25rem;
+}
+
+.sports-activity-content {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.sports-activity-name {
+  font-size: 0.8rem;
+  color: var(--sports-text);
+  white-space: nowrap;
+}
+
+.sports-activity-day {
+  font-size: 0.7rem;
+  color: var(--sports-secondary);
+  font-weight: 500;
+}
+
+/* Scrollbar Styling */
+.sports-activities-scroller::-webkit-scrollbar {
+  height: 4px;
+}
+
+.sports-activities-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sports-activities-scroller::-webkit-scrollbar-thumb {
+  background: var(--sports-secondary);
+  border-radius: 2px;
+}
+
+.sports-room-description {
+  color: var(--sports-text);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+/* Lightbox Styles */
+.sports-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sports-lightbox-fade 0.3s ease;
+}
+
+@keyframes sports-lightbox-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sports-lightbox-content {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  padding: 2rem;
+}
+
+.sports-lightbox-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: var(--sports-accent);
+  color: white;
+  border-radius: 50%;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.sports-lightbox-close:hover {
+  transform: scale(1.1);
+  background: var(--sports-primary);
+}
+
+.sports-lightbox-image-container {
+  position: relative;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sports-lightbox-image {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sports-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.sports-lightbox-arrow:hover {
+  background: var(--sports-accent);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sports-lightbox-prev {
+  left: -60px;
+}
+
+.sports-lightbox-next {
+  right: -60px;
+}
+
+.sports-lightbox-index {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .sports-banner-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+ 
+  
+  .sports-room-image-container {
+    height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sports-banner {
+    min-height: 400px;
+  }
+  
+  .sports-banner-title {
+    font-size: 2rem;
+  }
+  
+  .sports-room-name {
+    font-size: 1.2rem;
+  }
+
+  .sports-lightbox-content {
+    width: 95%;
+    padding: 1rem;
+  }
+  
+  .sports-lightbox-arrow {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sports-lightbox-prev {
+    left: 10px;
+  }
+  
+  .sports-lightbox-next {
+    right: 10px;
+  }
+  
+  .sports-lightbox-close {
+    top: 10px;
+    right: 10px;
+  }
+
+  .sports-activity-badge {
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+@media (max-width: 576px) {
+  
+  
+  
+  
+  .sports-room-address {
+    font-size: 0.85rem;
+  }
+
+  .sports-lightbox-image-container {
+    height: 60vh;
+  }
+  
+  .sports-lightbox-arrow {
+    width: 35px;
+    height: 35px;
+  }
+
+  .sports-lightbox-index {
+    font-size: 0.9rem;
+    bottom: 15px;
+  }
+
+  .sports-activity-name {
+    font-size: 0.75rem;
+  }
+
+  .sports-activity-day {
+    font-size: 0.65rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .sports-lightbox-content {
+    max-width: 1400px;
+  }
+}

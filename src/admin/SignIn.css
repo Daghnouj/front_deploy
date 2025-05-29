@@ -1,0 +1,33 @@
+.signin-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+.card {
+  border-radius: 1rem;
+  border: none;
+}
+
+.input-group-text {
+  background-color: #fff;
+  border-right: none;
+}
+
+.input-group .form-control {
+  border-left: none;
+}
+
+.btn-password-toggle {
+  background-color: transparent;
+  border: none;
+  color: #6c757d;
+  padding: 0 1rem;
+}
+
+.btn-password-toggle:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+

@@ -1,0 +1,233 @@
+/* DoctorDashboard.css */
+:root {
+    --doctor-primary: #457AFF;
+    --doctor-secondary: #8A4FFF;
+    --doctor-accent: #FF6B35;
+    --doctor-success: #4CAF50;
+    --doctor-background: #F7FAFC;
+    --doctor-surface: #FFFFFF;
+    --doctor-text-dark: #2D3748;
+    --doctor-text-light: #FFFFFF;
+    --doctor-muted: #718096;
+    --doctor-shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-dashboard-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--doctor-background);
+    min-height: 100vh;
+  }
+  
+  .doctor-stats-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .doctor-stat-card {
+    background: var(--doctor-surface);
+    border-radius: 16px;
+    box-shadow: var(--doctor-shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+  }
+  
+  .doctor-stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .doctor-stat-header {
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--doctor-text-light);
+  }
+  
+  .doctor-stat-primary { background: var(--doctor-primary); }
+  .doctor-stat-secondary { background: var(--doctor-secondary); }
+  .doctor-stat-accent { background: var(--doctor-accent); }
+  
+  .doctor-stat-icon {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  }
+  
+  .doctor-stat-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: -0.25px;
+    flex-grow: 1;
+  }
+  
+  .doctor-stat-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .doctor-stat-number {
+    display: block;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--doctor-text-dark);
+    margin: 1rem 0;
+    line-height: 1;
+  }
+  
+  .doctor-stat-subtext {
+    color: var(--doctor-muted);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    max-width: 200px;
+  }
+  
+  .doctor-stat-button {
+    border: none;
+    padding: 0.8rem 1.8rem;
+    border-radius: 8px;
+    color: var(--doctor-text-light);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: auto;
+    align-self: flex-start;
+  }
+  
+  /* Charts Section */
+  .doctor-charts-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    margin-top: 2rem;
+  }
+  
+  .doctor-chart-card {
+    background: var(--doctor-surface);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--doctor-shadow-sm);
+  }
+  
+  .doctor-chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+  
+  .doctor-chart-title {
+    color: var(--doctor-text-dark);
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  /* Medical Lists */
+  .doctor-medical-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .doctor-list-item {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: var(--doctor-surface);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .doctor-patient-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .doctor-patient-age {
+    color: var(--doctor-muted);
+    font-size: 0.9rem;
+  }
+  
+  .doctor-patient-condition {
+    background: var(--doctor-primary);
+    color: var(--doctor-text-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .doctor-appointment-time {
+    background: var(--doctor-secondary);
+    color: var(--doctor-text-light);
+    padding: 0.3rem 1rem;
+    border-radius: 8px;
+    margin-right: 1rem;
+  }
+  
+  .doctor-notification-item {
+    background: rgba(255, 107, 53, 0.1);
+    border-left: 3px solid var(--doctor-accent);
+  }
+  
+  /* Animations */
+  @keyframes doctorPulse {
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+  }
+  
+  .doctor-status-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--doctor-success);
+    border-radius: 50%;
+    margin-left: auto;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    animation: doctorPulse 1.5s infinite;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .doctor-dashboard-container {
+      padding: 1.5rem;
+    }
+    
+    .doctor-stat-number {
+      font-size: 2.2rem;
+    }
+    
+    .doctor-charts-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .doctor-chart-card {
+      padding: 1rem;
+    }
+    
+    .doctor-chart-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .doctor-stats-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .doctor-stat-button {
+      width: 100%;
+      text-align: center;
+    }
+  }

@@ -1,0 +1,78 @@
+/* HeroSection.css */
+
+.bg {
+  background-color: #F5A146 !important;
+  padding-top: 8rem !important;
+  padding-bottom: 6rem !important;
+}
+
+.titre {
+  font-family: 'Poppins', sans-serif;
+  color: rgb(255, 255, 255);
+  font-size: 58px;
+  font-weight: bold;
+}
+
+.para {
+  font-family: 'Poppins', sans-serif;
+  font-size: 21px;
+  line-height: 1.6;
+  color: rgb(255, 255, 255);
+}
+
+.hero-image {
+  width: 450px;
+  height: auto;
+}
+
+.help-select {
+  padding: 12px 24px;
+  font-size: 18px;
+  color: #333;
+  background-color: white;
+  border: 2px solid #007bff;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 250px;
+  padding-right: 40px; /* Increased padding to accommodate arrow */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center; /* Arrow moved 8px from right */
+}
+
+.go-btn {
+  padding: 12px 24px;
+  font-size: 18px;
+  color: white;
+  background-color: #457AFF;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    margin-bottom: -20px;
+    margin-top: 50px;
+    width: 350px;
+    height: auto;
+  }
+
+  .help-select {
+    width: 100%;
+  }
+
+  .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .go-btn {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
