@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
-import ReCAPTCHA from "react-google-recaptcha";
 import login from "../assets/login4.jpeg";
 import ReactivateModal from "./ReactivateModal";
 
@@ -13,9 +12,8 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", mdp: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [showReactivateModal, setShowReactivateModal] = useState(false);
-  const recaptchaRef = useRef();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -31,27 +29,19 @@ const Login = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
-  };
-
-  const handleRecaptchaChange = (token) => {
-    setRecaptchaToken(token);
+    if (error) setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     setLoading(true);
     setError("");
-
-    if (!recaptchaToken) {
-      setError("Veuillez vérifier que vous n'êtes pas un robot");
-      setLoading(false);
-      return;
-    }
 
     try {
       const response = await axios.post(
         "https://deploy-back-3.onrender.com/api/auth/login",
-        { ...formData, recaptchaToken }
+        formData
       );
       
       localStorage.setItem("token", response.data.token);
@@ -66,6 +56,7 @@ const Login = () => {
       }
     } finally {
       setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -74,25 +65,10 @@ const Login = () => {
     setError("");
     
     try {
-      // Réinitialiser le ReCAPTCHA et attendre une nouvelle vérification
-      recaptchaRef.current.reset();
-      setRecaptchaToken("");
-
-      // Attendre la nouvelle vérification
-      const newRecaptchaToken = await new Promise((resolve) => {
-        const checkToken = setInterval(() => {
-          if (recaptchaToken) {
-            clearInterval(checkToken);
-            resolve(recaptchaToken);
-          }
-        }, 100);
-      });
-
       const response = await axios.post(
         "https://deploy-back-3.onrender.com/api/auth/login",
         { 
           ...formData,
-          recaptchaToken: newRecaptchaToken,
           reactivate: true 
         }
       );
@@ -103,7 +79,6 @@ const Login = () => {
       navigate("/", { replace: true });
 
     } catch (error) {
-      console.error("Erreur de réactivation:", error);
       setError(error.response?.data?.message || "Échec de la réactivation");
     } finally {
       setLoading(false);
@@ -111,12 +86,11 @@ const Login = () => {
   };
 
   const handleCancelReactivation = () => {
-    recaptchaRef.current.reset();
-    setRecaptchaToken("");
     setShowReactivateModal(false);
   };
+
   const handleOAuthRedirect = (provider) => {
-    window.location.href = `https://deploy-back-3.onrender.com/api/auth/${provider}`;
+    window.location.href = `https://deploy-back-3.onrender.com/auth/${provider}`;
   };
 
   return (
@@ -129,32 +103,58 @@ const Login = () => {
       />
 
       <div className="row h-100">
-        <div className="col-md-8 d-none d-md-block p-0 position-relative">
-          <div 
-            className="h-100 w-100 bg-cover"
+        <div className="col-md-8 d-none d-md-block p-0 position-relative overflow-hidden">
+          <motion.div
+            className="h-100 w-100"
             style={{
               backgroundImage: `url(${login})`,
-              backgroundPosition: "center center"
+              backgroundPosition: "center center",
+              backgroundSize: "cover"
             }}
-          ></div>
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+          />
         </div>
 
         <div className="col-md-4 d-flex align-items-center justify-content-center bg-white">
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="w-85 px-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="w-85 px-4 py-5"
           >
-            <div className="text-center mb-5">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-center mb-5"
+            >
               <h2 className="fw-bold mb-3 text-start" style={{ color: "#2563eb" }}>Bienvenue !</h2>
               <p className="text-muted text-start">Entrez vos informations pour continuer</p>
-            </div>
+            </motion.div>
 
-            {error && <div className="alert alert-danger">{error}</div>}
+            {error && (
+              <motion.div 
+                className="alert alert-danger"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ 
+                  opacity: 1, 
+                  height: "auto" 
+                }}
+                exit={{ opacity: 0, height: 0 }}
+              >
+                {error}
+              </motion.div>
+            )}
 
             <form onSubmit={handleSubmit}>
-              <div className="mb-3">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mb-3"
+              >
                 <label htmlFor="email" className="form-label fw-medium">Email</label>
                 <input
                   type="email"
@@ -164,10 +164,16 @@ const Login = () => {
                   onChange={handleChange}
                   style={{ borderColor: "#e2e8f0" }}
                   required
+                  disabled={loading}
                 />
-              </div>
+              </motion.div>
 
-              <div className="mb-4">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 }}
+                className="mb-4"
+              >
                 <label htmlFor="mdp" className="form-label fw-medium ">Mot de passe</label>
                 <input
                   type="password"
@@ -177,16 +183,23 @@ const Login = () => {
                   onChange={handleChange}
                   style={{ borderColor: "#e2e8f0" }}
                   required
+                  disabled={loading}
                 />
-              </div>
+              </motion.div>
 
-              <div className="d-flex align-items-center justify-content-between mb-4 gap-3">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8 }}
+                className="d-flex align-items-center justify-content-between mb-4 gap-3"
+              >
                 <div className="form-check m-0">
                   <input
                     type="checkbox"
                     className="form-check-input"
                     id="rememberMe"
                     style={{ accentColor: "#2563eb" }}
+                    disabled={loading}
                   />
                   <label className="form-check-label text-muted" htmlFor="rememberMe">
                     Se souvenir de moi
@@ -199,32 +212,38 @@ const Login = () => {
                 >
                   Mot de passe oublié ?
                 </Link>
-              </div>
-
-              <div className="mb-4" style={{ display: "flex", justifyContent: "center" }}>
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey="6LcwKU8rAAAAAJjUJZWml6BLLte83LdMQiXqPLr8"
-                  onChange={handleRecaptchaChange}
-                />
-              </div>
+              </motion.div>
 
               <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="btn w-100 py-2 mb-3 text-white fw-medium rounded-5"
+                className="btn w-100 py-2 mb-3 text-white fw-medium rounded-5 d-flex justify-content-center align-items-center"
                 style={{ 
                   backgroundColor: "#FC20E1",
                   border: "none",
+                  minHeight: "45px"
                 }}
-                disabled={loading}
+                disabled={loading || isSubmitting}
               >
-                {loading ? "Connexion en cours..." : "Se connecter"}
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                    Connexion en cours...
+                  </>
+                ) : "Se connecter"}
               </motion.button>
             </form>
 
-            <div className="text-center my-4 position-relative">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.0 }}
+              className="text-center my-4 position-relative"
+            >
               <hr className="border-1" style={{ borderColor: "#e2e8f0" }} />
               <span 
                 className="position-absolute bg-white px-3 text-muted"
@@ -237,9 +256,14 @@ const Login = () => {
               >
                 OU CONTINUER AVEC
               </span>
-            </div>
+            </motion.div>
 
-            <div className="d-flex gap-3 justify-content-center mb-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.1 }}
+              className="d-flex gap-3 justify-content-center mb-4"
+            >
               <button
                 onClick={() => handleOAuthRedirect("google")}
                 className="btn btn-outline d-flex align-items-center gap-2 px-4 py-2 rounded-5"
@@ -247,6 +271,7 @@ const Login = () => {
                   borderColor: "#000000",
                   color: "#000000",
                 }}
+                disabled={loading}
               >
                 <FaGoogle className="fs-5" style={{ color: "#000000" }} /> 
                 Google
@@ -259,13 +284,19 @@ const Login = () => {
                   borderColor: "#000000",
                   color: "#000000",
                 }}
+                disabled={loading}
               >
                 <FaFacebook className="fs-5" style={{ color: "#000000" }} /> 
                 Facebook
               </button>
-            </div>
+            </motion.div>
 
-            <p className="text-center text-muted mt-4">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2 }}
+              className="text-center text-muted mt-4"
+            >
               Pas encore membre ?{" "}
               <Link 
                 to="/signup" 
@@ -274,7 +305,7 @@ const Login = () => {
               >
                 Créer un compte
               </Link>
-            </p>
+            </motion.p>
           </motion.div>
         </div>
       </div>
