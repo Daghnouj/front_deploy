@@ -19,7 +19,7 @@ const Sidebar = () => {
     unreadSenders,
   } = useMessageStore();
 
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://deploy-back-3.onrender.com';
   const { userId,users } = useParams();
 
 

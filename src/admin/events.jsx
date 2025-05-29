@@ -15,7 +15,7 @@ const getPhotoUrl = (photos) => {
   if (!photos || photos.length === 0) return null;
   return photos[0]?.startsWith('http') 
     ? photos[0] 
-    : `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/${photos[0]}`;
+    : `${import.meta.env.VITE_API_BASE_URL || 'https://deploy-back-3.onrender.com'}/${photos[0]}`;
 };
 
 // Fonction pour redimensionner une image
@@ -93,7 +93,7 @@ function Events() {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const eventsPerPage = 6;
-  const BASE_URL = `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000'}/api/events`;
+  const BASE_URL = `${import.meta.env.VITE_API_BASE_URL || 'https://deploy-back-3.onrender.com'}/api/events`;
 
   const fetchEvents = useCallback(async () => {
     setIsLoading(true);

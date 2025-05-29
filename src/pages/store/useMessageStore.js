@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 
 // useMessageStore.js
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000').replace(/\/$/, '');
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'https://deploy-back-3.onrender.com').replace(/\/$/, '');
 const useMessageStore = create((set, get) => ({
   // États
   messages: [],

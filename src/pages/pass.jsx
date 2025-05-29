@@ -34,7 +34,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/api/password/forgot-password", { email });
+      const response = await axios.post("https://deploy-back-3.onrender.com/api/password/forgot-password", { email });
       setUserId(response.data.id);
       setStep(2);
       setTimeLeft(600);
@@ -50,7 +50,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post(`http://localhost:5000/api/password/verify-otp/${userId}`, { otp });
+      await axios.post(`https://deploy-back-3.onrender.com/api/password/verify-otp/${userId}`, { otp });
       setStep(3);
       setMessage({ text: "Code OTP vérifié avec succès", type: "success" });
     } catch (error) {
@@ -69,7 +69,7 @@ const ForgotPassword = () => {
 
     setIsLoading(true);
     try {
-      await axios.post(`http://localhost:5000/api/password/change-password/${userId}`, { newPassword ,confirmPassword});
+      await axios.post(`https://deploy-back-3.onrender.com/api/password/change-password/${userId}`, { newPassword ,confirmPassword});
       setMessage({ text: "Mot de passe réinitialisé avec succès ! Redirection...", type: "success" });
       setTimeout(() => navigate("/login"), 2000);
     } catch (error) {

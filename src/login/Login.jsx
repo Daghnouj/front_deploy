@@ -50,7 +50,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://deploy-back-3.onrender.com/api/auth/login",
         { ...formData, recaptchaToken }
       );
       
@@ -89,7 +89,7 @@ const Login = () => {
       });
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://deploy-back-3.onrender.com/api/auth/login",
         { 
           ...formData,
           recaptchaToken: newRecaptchaToken,
@@ -116,7 +116,7 @@ const Login = () => {
     setShowReactivateModal(false);
   };
   const handleOAuthRedirect = (provider) => {
-    window.location.href = `http://localhost:5000/auth/${provider}`;
+    window.location.href = `https://deploy-back-3.onrender.com/api/auth/${provider}`;
   };
 
   return (

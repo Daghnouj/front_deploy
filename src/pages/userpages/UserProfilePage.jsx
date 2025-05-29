@@ -74,7 +74,7 @@ const ProfilePage = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const userResponse = await axios.get(`http://localhost:5000/api/user/profile/${userId}`, {
+        const userResponse = await axios.get(`https://deploy-back-3.onrender.com/api/user/profile/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -83,7 +83,7 @@ const ProfilePage = () => {
           photo: userResponse.data.photo 
   ? userResponse.data.photo.startsWith('http') 
     ? userResponse.data.photo 
-    : `http://localhost:5000/uploads/${userResponse.data.photo}`
+    : `https://deploy-back-3.onrender.com/uploads/${userResponse.data.photo}`
   : 'default.png',
         });
 
@@ -108,7 +108,7 @@ const ProfilePage = () => {
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/user/profile/${userId}`,
+        `https://deploy-back-3.onrender.com/api/user/profile/${userId}`,
         { ...profileData },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -130,11 +130,11 @@ const ProfilePage = () => {
       const userId = getUserIdFromToken();
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:5000/api/user/profile/${userId}/photo`,
+        `https://deploy-back-3.onrender.com/api/user/profile/${userId}/photo`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setProfileData({ ...profileData, photo: `http://localhost:5000/uploads/${response.data.photo}` });
+      setProfileData({ ...profileData, photo: `https://deploy-back-3.onrender.com/uploads/${response.data.photo}` });
     } catch (error) {
       console.error('Photo upload error:', error);
     }
@@ -151,7 +151,7 @@ const ProfilePage = () => {
       const token = localStorage.getItem('token');
       
       await axios.put(
-        `http://localhost:5000/api/user/profile/${userId}/password`,
+        `https://deploy-back-3.onrender.com/api/user/profile/${userId}/password`,
         {
           oldPassword: profileData.currentPassword,
           newPassword: profileData.newPassword,
@@ -175,7 +175,7 @@ const ProfilePage = () => {
       
       const endpoint = activate ? `activate` : `deactivate`;
       await axios.put(
-        `http://localhost:5000/api/user/profile/${userId}/${endpoint}`,
+        `https://deploy-back-3.onrender.com/api/user/profile/${userId}/${endpoint}`,
         { password: deactivationPassword },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -444,7 +444,7 @@ const ProfilePage = () => {
                   const token = localStorage.getItem('token');
                   
                   await axios.put(
-                    `http://localhost:5000/api/user/profile/${userId}/deactivate`,
+                    `https://deploy-back-3.onrender.com/api/user/profile/${userId}/deactivate`,
                     { password: deactivationPassword },
                     { headers: { Authorization: `Bearer ${token}` } }
                   );

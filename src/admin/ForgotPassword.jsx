@@ -52,7 +52,7 @@ const ForgotPasswordAdmin = () => {
       switch (step) {
         case 1: {
           const response = await axios.post(
-            'http://localhost:5000/api/admin/forgot-password',
+            'https://deploy-back-3.onrender.com/api/admin/forgot-password',
             { email }
           );
           setAdminId(response.data.adminId);
@@ -61,7 +61,7 @@ const ForgotPasswordAdmin = () => {
           break;
         }
         case 2: {
-          await axios.post('http://localhost:5000/api/admin/verify-otp', {
+          await axios.post('https://deploy-back-3.onrender.com/api/admin/verify-otp', {
             adminId,
             otp,
           });
@@ -73,7 +73,7 @@ const ForgotPasswordAdmin = () => {
           if (newPassword !== confirmPassword) {
             throw new Error('Les mots de passe ne correspondent pas');
           }
-          await axios.post('http://localhost:5000/api/admin/change-password', {
+          await axios.post('https://deploy-back-3.onrender.com/api/admin/change-password', {
             adminId,
             newPassword,
           });

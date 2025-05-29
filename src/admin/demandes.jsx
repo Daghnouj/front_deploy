@@ -27,7 +27,7 @@ const VerificationRequests = () => {
         }
 
         const response = await axios.get(
-          'http://localhost:5000/api/admin/unverified-requests',
+          'https://deploy-back-3.onrender.com/api/admin/unverified-requests',
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -67,7 +67,7 @@ const VerificationRequests = () => {
       try {
         const token = localStorage.getItem('authToken');
         await axios.put(
-          `http://localhost:5000/api/admin/verify/${professionalId}`,
+          `https://deploy-back-3.onrender.com/api/admin/verify/${professionalId}`,
           {},
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -244,7 +244,7 @@ const VerificationRequests = () => {
                       <button 
                         className="btn btn-outline-primary"
                         onClick={() => handleDownload(
-                          `http://localhost:5000/api/admin/download/${selectedRequest.document.split('\\').pop()}`
+                          `https://deploy-back-3.onrender.com/api/admin/download/${selectedRequest.document.split('\\').pop()}`
                         )}
                       >
                         <FaDownload className="me-2" /> Download Diploma

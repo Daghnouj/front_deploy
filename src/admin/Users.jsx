@@ -3,7 +3,7 @@ import axios from 'axios';
 import { PencilSquare, Trash, CheckCircleFill, XCircleFill } from 'react-bootstrap-icons';
 import './Users.css';
 
-const API_URL = 'http://localhost:5000/api/admin';
+const API_URL = 'https://deploy-back-3.onrender.com/api/admin';
 
 const api = axios.create({
   baseURL: API_URL,
@@ -163,7 +163,7 @@ const UserManagement = () => {
                 <tr key={user._id}>
                   <td>
                     <img
-                      src={user.photo ? `http://localhost:5000/uploads/${user.photo}?${Date.now()}` : '/default-avatar.png'}
+                      src={user.photo ? `https://deploy-back-3.onrender.com/uploads/${user.photo}?${Date.now()}` : '/default-avatar.png'}
                       alt={user.nom}
                       className="user-avatar rounded-circle"
                       onError={(e) => {

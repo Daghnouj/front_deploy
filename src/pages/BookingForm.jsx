@@ -7,7 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://deploy-back-3.onrender.com/api";
 
 const BookingForm = () => {
   const { therapistId } = useParams();

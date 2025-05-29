@@ -21,7 +21,7 @@ const NotificationModal = () => {
   
   const [isMarking, setIsMarking] = useState(false);
   const [expandedPosts, setExpandedPosts] = useState(new Set());
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://deploy-back-3.onrender.com';
 
   const handleNotificationClick = async (notification) => {
     try {

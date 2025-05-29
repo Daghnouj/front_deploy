@@ -4,7 +4,7 @@ import { FaUpload, FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 import './admingalerie.css';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://deploy-back-3.onrender.com/api',
   withCredentials: true,
 });
 

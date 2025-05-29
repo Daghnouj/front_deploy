@@ -62,7 +62,7 @@ const Gallery = () => {
         : {};
  
       await axios.post(
-        `http://localhost:5000/api/galerie/${videoId}/view`,
+        `https://deploy-back-3.onrender.com/api/galerie/${videoId}/view`,
         {},
         config
       );

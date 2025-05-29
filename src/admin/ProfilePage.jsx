@@ -27,7 +27,7 @@ const AdminProfile = () => {
   const fetchAdminProfile = async () => {
     try {
       const authToken = localStorage.getItem('authToken');
-      const response = await axios.get('http://localhost:5000/api/admin/profile', {
+      const response = await axios.get('https://deploy-back-3.onrender.com/api/admin/profile', {
         headers: { Authorization: `Bearer ${authToken}` }
       });
 
@@ -37,7 +37,7 @@ const AdminProfile = () => {
         name: nom,
         email,
         phone,
-        avatar: photo ? `http://localhost:5000/uploads/admins/${photo}` : '/default-avatar.jpg',
+        avatar: photo ? `https://deploy-back-3.onrender.com/uploads/admins/${photo}` : '/default-avatar.jpg',
       });
     } catch (error) {
       showNotification('Error fetching profile', 'danger');
@@ -65,14 +65,14 @@ const AdminProfile = () => {
 
       try {
         const authToken = localStorage.getItem('authToken');
-        const response = await axios.put('http://localhost:5000/api/admin/profile-photo', formData, {
+        const response = await axios.put('https://deploy-back-3.onrender.com/api/admin/profile-photo', formData, {
           headers: {
             Authorization: `Bearer ${authToken}`,
             'Content-Type': 'multipart/form-data',
           }
         });
 
-        setProfileData({ ...profileData, avatar: `http://localhost:5000/uploads/admins/${response.data.photo}` });
+        setProfileData({ ...profileData, avatar: `https://deploy-back-3.onrender.com/uploads/admins/${response.data.photo}` });
         showNotification('Profile photo updated', 'success');
       } catch (error) {
         showNotification('Error updating photo', 'danger');
@@ -85,7 +85,7 @@ const AdminProfile = () => {
       const { name, email, phone } = profileData;
       const authToken = localStorage.getItem('authToken');
       const response = await axios.put(
-        'http://localhost:5000/api/admin/profile',
+        'https://deploy-back-3.onrender.com/api/admin/profile',
         { nom: name, email, phone },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );
@@ -102,7 +102,7 @@ const AdminProfile = () => {
       const { currentPassword, newPassword } = profileData;
       const authToken = localStorage.getItem('authToken');
       await axios.put(
-        'http://localhost:5000/api/admin/password',
+        'https://deploy-back-3.onrender.com/api/admin/password',
         { oldPassword: currentPassword, newPassword, confirmPassword: newPassword },
         { headers: { Authorization: `Bearer ${authToken}` } }
       );

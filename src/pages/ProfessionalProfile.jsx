@@ -13,7 +13,7 @@ const ProfessionalProfile = () => {
   useEffect(() => {
     const fetchProfessional = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/professionals/${id}`);
+        const response = await axios.get(`https://deploy-back-3.onrender.com/api/professionals/${id}`);
         setProfessional(response.data);
         setLoading(false);
       } catch (err) {
@@ -44,7 +44,7 @@ const ProfessionalProfile = () => {
         <div className="proprofile-header">
           <div className="proprofile-image-wrapper">
             <img
-              src={professional.photo ? `http://localhost:5000/uploads/${professional.photo}` : '/placeholder-professional.jpg'}
+              src={professional.photo ? `https://deploy-back-3.onrender.com/uploads/${professional.photo}` : '/placeholder-professional.jpg'}
               alt={professional.nom}
               className="proprofile-image"
             />

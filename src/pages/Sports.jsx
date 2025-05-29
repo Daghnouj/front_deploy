@@ -23,7 +23,7 @@ const TherapyRooms = () => {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/events');
+        const response = await fetch('https://deploy-back-3.onrender.com/api/events');
         if (!response.ok) throw new Error('Erreur lors du chargement des salles');
         const data = await response.json();
         setRooms(data);
@@ -137,7 +137,7 @@ const TherapyRooms = () => {
                       {room.images.map((img, index) => (
                         <Carousel.Item key={index}>
                           <img 
-                            src={`http://localhost:5000/${img}`} 
+                            src={`https://deploy-back-3.onrender.com/${img}`} 
                             alt={room.name}
                             className="sports-room-image"
                             onClick={() => handleImageClick(room, index)}
@@ -195,7 +195,7 @@ const TherapyRooms = () => {
             
             <div className="sports-lightbox-image-container">
               <img 
-                src={`http://localhost:5000/${selectedRoom.images[currentImageIndex]}`} 
+                src={`https://deploy-back-3.onrender.com/${selectedRoom.images[currentImageIndex]}`} 
                 alt={selectedRoom.name}
                 className="sports-lightbox-image"
               />

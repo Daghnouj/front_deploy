@@ -29,7 +29,7 @@ const SchedulePage = () => {
           return;
         }
 
-        const response = await fetch('http://localhost:5000/api/booking/user', {
+        const response = await fetch('https://deploy-back-3.onrender.com/api/booking/user', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ const SchedulePage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/api/booking/${id}/cancel`, {
+      const response = await fetch(`https://deploy-back-3.onrender.com/api/booking/${id}/cancel`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,

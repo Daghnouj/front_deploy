@@ -8,7 +8,7 @@ const Logout = () => {
     const performLogout = async () => {
       try {
         // Appel API vers le backend
-        await fetch('http://localhost:5000/api/admin/logout', {
+        await fetch('https://deploy-back-3.onrender.com/api/admin/logout', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

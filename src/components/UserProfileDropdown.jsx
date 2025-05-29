@@ -16,7 +16,7 @@ const UserProfileDropdown = ({ onLogout }) => {
   const processPhotoUrl = (photo) => {
     if (!photo) return '/default-profile.png';
     if (photo.startsWith('http')) return photo;
-    return `http://localhost:5000/uploads/${photo}`;
+    return `https://deploy-back-3.onrender.com/uploads/${photo}`;
   };
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const UserProfileDropdown = ({ onLogout }) => {
 
         // Récupération des données actualisées
         const response = await axios.get(
-          `http://localhost:5000/api/user/profile/${decoded.id}`,
+          `https://deploy-back-3.onrender.com/api/user/profile/${decoded.id}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 

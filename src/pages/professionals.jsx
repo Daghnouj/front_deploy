@@ -19,8 +19,8 @@ const Professionals = () => {
     const fetchData = async () => {
       try {
         const [professionalsRes, filtersRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/professionals", { params: filters }),
-          axios.get("http://localhost:5000/api/professionals/filters")
+          axios.get("https://deploy-back-3.onrender.com/api/professionals", { params: filters }),
+          axios.get("https://deploy-back-3.onrender.com/api/professionals/filters")
         ]);
        
         setProfessionals(professionalsRes.data);
@@ -97,7 +97,7 @@ const Professionals = () => {
             <div key={professional._id} className="col-3 mb-4 d-flex justify-content-center">
               <Link to={`/professionals/${professional._id}`} className="professional-card">
                 <img
-                  src={professional.photo ? `http://localhost:5000/uploads/${professional.photo}` : '/placeholder-professional.jpg'}
+                  src={professional.photo ? `https://deploy-back-3.onrender.com/uploads/${professional.photo}` : '/placeholder-professional.jpg'}
                   alt={professional.nom}
                   className="professional-image"
                 />

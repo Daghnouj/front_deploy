@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import axios from 'axios';
 import { io } from 'socket.io-client';
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'https://deploy-back-3.onrender.com';
 
 const useCommunityStore = create((set, get) => ({
   posts: [],
@@ -110,7 +110,7 @@ fetchPosts: async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get(
-        `http://localhost:5000/api/user/${userId}`,
+        `https://deploy-back-3.onrender.com/api/user/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
           timeout: 5000
@@ -123,8 +123,8 @@ fetchPosts: async () => {
     photo: response.data.photo 
       ? response.data.photo.startsWith('http') // Modification ici
         ? response.data.photo
-        : `http://localhost:5000/uploads/${response.data.photo}`
-      : 'http://localhost:5000/default.png'
+        : `https://deploy-back-3.onrender.com/uploads/${response.data.photo}`
+      : 'https://deploy-back-3.onrender.com/default.png'
   },
   isLoading: false 
 });
@@ -146,7 +146,7 @@ fetchPosts: async () => {
         if (!token) throw new Error('Token non trouvé');
 
         const response = await axios.post(
-            'http://localhost:5000/api/posts/addPost',
+            'https://deploy-back-3.onrender.com/api/posts/addPost',
             { content: newPostContent },
             {
                 headers: {
@@ -228,7 +228,7 @@ addComment: async (postId, text) => {
   try {
     const token = localStorage.getItem('token');
     await axios.post(
-      `http://localhost:5000/api/posts/${postId}/comment`,
+      `https://deploy-back-3.onrender.com/api/posts/${postId}/comment`,
       { comment: text },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -243,7 +243,7 @@ updateComment: async (postId, commentId, newText) => {
   try {
     const token = localStorage.getItem('token');
     await axios.put(
-      `http://localhost:5000/api/posts/${postId}/comments/${commentId}`,
+      `https://deploy-back-3.onrender.com/api/posts/${postId}/comments/${commentId}`,
       { newText },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -258,7 +258,7 @@ deleteComment: async (postId, commentId) => {
   try {
     const token = localStorage.getItem('token');
     await axios.delete(
-      `http://localhost:5000/api/posts/${postId}/comments/${commentId}`,
+      `https://deploy-back-3.onrender.com/api/posts/${postId}/comments/${commentId}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     await fetchPosts();
@@ -272,7 +272,7 @@ addReply: async (postId, commentId, text) => {
   try {
     const token = localStorage.getItem('token');
     await axios.post(
-      `http://localhost:5000/api/posts/${postId}/comments/${commentId}/reply`,
+      `https://deploy-back-3.onrender.com/api/posts/${postId}/comments/${commentId}/reply`,
       { replyText: text },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -287,7 +287,7 @@ updateReply: async (postId, commentId, replyId, newText) => {
   try {
     const token = localStorage.getItem('token');
     await axios.put(
-      `http://localhost:5000/api/posts/${postId}/comments/${commentId}/replies/${replyId}`,
+      `https://deploy-back-3.onrender.com/api/posts/${postId}/comments/${commentId}/replies/${replyId}`,
       { newText },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -302,7 +302,7 @@ deleteReply: async (postId, commentId, replyId) => {
   try {
     const token = localStorage.getItem('token');
     await axios.delete(
-      `http://localhost:5000/api/posts/${postId}/comments/${commentId}/replies/${replyId}`,
+      `https://deploy-back-3.onrender.com/api/posts/${postId}/comments/${commentId}/replies/${replyId}`,
       { headers: { Authorization: `Bearer ${token}` } }
     );
     await fetchPosts();

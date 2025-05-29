@@ -16,7 +16,7 @@ export const useGalerieStore = create((set, get) => ({
   fetchTopVideos: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axios.get('http://localhost:5000/api/galerie/top');
+      const res = await axios.get('https://deploy-back-3.onrender.com/api/galerie/top');
       const sorted = res.data.sort((a, b) => 
         b.viewedBy.length - a.viewedBy.length || 
         new Date(b.createdAt) - new Date(a.createdAt)
@@ -32,7 +32,7 @@ export const useGalerieStore = create((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/galerie?categorie=${encodeURIComponent(category)}`
+        `https://deploy-back-3.onrender.com/api/galerie?categorie=${encodeURIComponent(category)}`
       );
       set({
         categoryVideos: res.data,
@@ -49,9 +49,9 @@ export const useGalerieStore = create((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       const [allRes, categoryRes] = await Promise.all([
-        axios.get('http://localhost:5000/api/galerie'),
+        axios.get('https://deploy-back-3.onrender.com/api/galerie'),
         category 
-          ? axios.get(`http://localhost:5000/api/galerie?categorie=${encodeURIComponent(category)}`)
+          ? axios.get(`https://deploy-back-3.onrender.com/api/galerie?categorie=${encodeURIComponent(category)}`)
           : null,
       ]);
 

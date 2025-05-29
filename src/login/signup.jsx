@@ -57,7 +57,7 @@ const SignUp = () => {
       });
 
       const response = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "https://deploy-back-3.onrender.com/api/auth/signup",
         formDataToSend,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
@@ -75,7 +75,7 @@ const SignUp = () => {
   };
 
   const handleOAuthRedirect = (provider) => {
-    window.location.href = `http://localhost:5000/auth/${provider}`;
+    window.location.href = `https://deploy-back-3.onrender.com/auth/${provider}`;
   };
 
   return (

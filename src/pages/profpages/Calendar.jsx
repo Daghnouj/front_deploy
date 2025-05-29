@@ -19,7 +19,7 @@ const Calendar = () => {
     end: ''
   });
 
-  axios.defaults.baseURL = 'http://localhost:5000';
+  axios.defaults.baseURL = 'https://deploy-back-3.onrender.com';
   axios.interceptors.request.use(config => {
     const token = localStorage.getItem('token');
     if (token) config.headers.Authorization = `Bearer ${token}`;

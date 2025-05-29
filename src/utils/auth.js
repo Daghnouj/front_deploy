@@ -1,5 +1,5 @@
 // src/utils/auth.js
 export function connectGoogle() {
-    window.location.href = 'http://localhost:5000/auth/google';
+    window.location.href = 'https://deploy-back-3.onrender.com/auth/google';
   }
   

@@ -21,7 +21,7 @@ const Signup = () => {
     setError('');
 
     try {
-      await axios.post('http://localhost:5000/api/admin/signup', {
+      await axios.post('https://deploy-back-3.onrender.com/api/admin/signup', {
         nom: user.name,
         email: user.email,
         mdp: user.password

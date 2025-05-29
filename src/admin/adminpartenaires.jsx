@@ -3,8 +3,8 @@ import axios from 'axios';
 import { FaPlus, FaEdit, FaTrash, FaEye, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 import './adminpartenaires.css';
 
-const BASE_URL = 'http://localhost:5000/api/partenaires';
-const BACKEND_BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'https://deploy-back-3.onrender.com/api/partenaires';
+const BACKEND_BASE_URL = 'https://deploy-back-3.onrender.com';
 
 function PartnersManagement() {
   const [partners, setPartners] = useState([]);

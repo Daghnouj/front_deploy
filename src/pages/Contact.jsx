@@ -30,7 +30,7 @@ const ContactForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5000/api/contact", formData);
+      const response = await axios.post("https://deploy-back-3.onrender.com/api/contact", formData);
       if (response.data.success) {
         setStatusMessage("Message envoyé avec succès !");
         setFormData({

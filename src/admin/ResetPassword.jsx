@@ -29,7 +29,7 @@ const ResetPassword = () => {
         throw new Error('Lien de réinitialisation invalide');
       }
 
-      await axios.post('http://localhost:5000/api/admin/change-password', {
+      await axios.post('https://deploy-back-3.onrender.com/api/admin/change-password', {
         token,
         newPassword
       });

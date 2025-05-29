@@ -35,7 +35,7 @@ const CommentModal = ({ show, handleClose, post, setSelectedPost }) => {
 
   const token = localStorage.getItem('token');
   const currentUserId = token ? jwtDecode(token)?.id : null;
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://deploy-back-3.onrender.com';
   const { notificationTarget, clearNotificationTarget } = useCommunityStore();
   
   useEffect(() => {

@@ -77,17 +77,17 @@ const [confirmationDialog, setConfirmationDialog] = useState(false);
       try {
         const token = localStorage.getItem('token');
         
-        const userResponse = await axios.get(`http://localhost:5000/api/user/profile/${userId}`, {
+        const userResponse = await axios.get(`https://deploy-back-3.onrender.com/api/user/profile/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         
-        const professionalResponse = await axios.get(`http://localhost:5000/api/professionals/${userId}`);
+        const professionalResponse = await axios.get(`https://deploy-back-3.onrender.com/api/professionals/${userId}`);
         
         setProfileData({
           ...userResponse.data,
           specialite: professionalResponse.data?.specialite || '',
           photo: userResponse.data.photo 
-            ? `http://localhost:5000/uploads/${userResponse.data.photo}`
+            ? `https://deploy-back-3.onrender.com/uploads/${userResponse.data.photo}`
             : 'default.png',
         });
         
@@ -113,7 +113,7 @@ const [confirmationDialog, setConfirmationDialog] = useState(false);
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/user/profile/${userId}`,
+        `https://deploy-back-3.onrender.com/api/user/profile/${userId}`,
         { ...profileData },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -141,7 +141,7 @@ const [confirmationDialog, setConfirmationDialog] = useState(false);
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-        `http://localhost:5000/api/professionals/${userId}/services`,
+        `https://deploy-back-3.onrender.com/api/professionals/${userId}/services`,
         { services },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -164,11 +164,11 @@ const [confirmationDialog, setConfirmationDialog] = useState(false);
       const userId = getUserIdFromToken();
       const token = localStorage.getItem('token');
       const response = await axios.put(
-        `http://localhost:5000/api/user/profile/${userId}/photo`,
+        `https://deploy-back-3.onrender.com/api/user/profile/${userId}/photo`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setProfileData({ ...profileData, photo: `http://localhost:5000/uploads/${response.data.photo}` });
+      setProfileData({ ...profileData, photo: `https://deploy-back-3.onrender.com/uploads/${response.data.photo}` });
     } catch (error) {
       console.error('Photo upload error:', error);
     }
@@ -186,7 +186,7 @@ const [confirmationDialog, setConfirmationDialog] = useState(false);
       const token = localStorage.getItem('token');
       
       await axios.put(
-        `http://localhost:5000/api/user/profile/${userId}/password`,
+        `https://deploy-back-3.onrender.com/api/user/profile/${userId}/password`,
         {
           oldPassword: profileData.currentPassword,
           newPassword: profileData.newPassword,
@@ -214,7 +214,7 @@ const [confirmationDialog, setConfirmationDialog] = useState(false);
       : `deactivate`;
 
     await axios.put(
-      `http://localhost:5000/api/user/profile/${userId}/${endpoint}`,
+      `https://deploy-back-3.onrender.com/api/user/profile/${userId}/${endpoint}`,
       { password: deactivationPassword },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -545,7 +545,7 @@ const [confirmationDialog, setConfirmationDialog] = useState(false);
           const token = localStorage.getItem('token');
           
           await axios.put(
-            `http://localhost:5000/api/user/profile/${userId}/deactivate`,
+            `https://deploy-back-3.onrender.com/api/user/profile/${userId}/deactivate`,
             { password: deactivationPassword },
             { headers: { Authorization: `Bearer ${token}` } }
           );

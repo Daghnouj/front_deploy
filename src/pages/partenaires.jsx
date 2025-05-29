@@ -9,7 +9,7 @@ const PartenairesPage = () => {
     // Fetch partners from your backend
     const fetchPartners = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/partenaires');
+        const response = await fetch('https://deploy-back-3.onrender.com/api/partenaires');
         const data = await response.json();
         setPartners(data);
       } catch (error) {
@@ -47,7 +47,7 @@ const PartenairesPage = () => {
                   onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
                 >
                   <img
-                    src={`http://localhost:5000/uploads/${partner.logo}`}
+                    src={`https://deploy-back-3.onrender.com/uploads/${partner.logo}`}
                     alt={partner.nom}
                     className="card-img-top"
                     style={{ padding: '20px', borderRadius: '20px' }}
