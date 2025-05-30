@@ -13,7 +13,9 @@
   top: 100px;
 }
 
-
+.cu{
+  cursor: pointer;
+}
 .add-post-btn {
   background-color: #FFFFFF;
   color: #000;
@@ -287,4 +289,6 @@
 
 .add-post-btn:hover {
   transform: translateY(-2px);
+  background-color: white;
+
 }

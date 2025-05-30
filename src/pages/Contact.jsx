@@ -32,7 +32,7 @@ const ContactForm = () => {
     try {
       const response = await axios.post("https://deploy-back-3.onrender.com/api/contact", formData);
       if (response.data.success) {
-        setStatusMessage("Message envoyé avec succès !");
+        setStatusMessage("Message sent successfully!");
         setFormData({
           firstName: "",
           lastName: "",
@@ -44,7 +44,7 @@ const ContactForm = () => {
         });
       }
     } catch (error) {
-      setStatusMessage("Une erreur s'est produite, veuillez réessayer.");
+      setStatusMessage("An error occurred, please try again.");
       console.error(error);
     }
   };
@@ -54,7 +54,7 @@ const ContactForm = () => {
       {/* Title and Description */}
       <Container className="text-start contact-intro">
         <h2>
-        If you have any questions, suggestions, or would like to get involved, fill out the form below or reach out to us directly. We’re here to support you.
+          If you have any questions, suggestions, or would like to get involved, fill out the form below or reach out to us directly. We’re here to support you.
         </h2>
       </Container>
 
@@ -68,7 +68,7 @@ const ContactForm = () => {
                   <Form.Group className="mb-3">
                     <Form.Control
                       type="text"
-                      placeholder="Nom"
+                      placeholder="First Name"
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleChange}
@@ -80,7 +80,7 @@ const ContactForm = () => {
                   <Form.Group className="mb-3">
                     <Form.Control
                       type="text"
-                      placeholder="Prénom"
+                      placeholder="Last Name"
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleChange}
@@ -107,7 +107,7 @@ const ContactForm = () => {
                   <Form.Group className="mb-3">
                     <Form.Control
                       type="text"
-                      placeholder="Ville"
+                      placeholder="City"
                       name="city"
                       value={formData.city}
                       onChange={handleChange}
@@ -122,7 +122,7 @@ const ContactForm = () => {
                   <Form.Group className="mb-3">
                     <Form.Control
                       type="tel"
-                      placeholder="Téléphone"
+                      placeholder="Phone"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
@@ -134,7 +134,7 @@ const ContactForm = () => {
                   <Form.Group className="mb-3">
                     <Form.Control
                       type="text"
-                      placeholder="Sujet"
+                      placeholder="Subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
@@ -180,10 +180,10 @@ const ContactForm = () => {
                   <FaFax /> Fax: +216 71 000 753
                 </p>
                 <p>
-                  <strong>Horaires:</strong> <br />
-                  Siège: Lundi - Vendredi <br />
-                  8:00 - 13:00 <br />
-                  14:00 - 17:00
+                  <strong>Hours:</strong> <br />
+                  Office: Monday - Friday <br />
+                  8:00 AM - 1:00 PM <br />
+                  2:00 PM - 5:00 PM
                 </p>
                 <p>
                   <FaEnvelope /> solidarity@gmail.com

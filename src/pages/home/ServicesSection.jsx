@@ -1,21 +1,51 @@
+import React from "react";
 import "./ServicesSection.css";
-
+import { Link } from "react-router-dom";
+import g11 from "../../assets/g11.png";
+import g12 from "../../assets/g12.png";
+import g13 from "../../assets/g13.png";
+import g14 from "../../assets/g14.png";
 const ServicesSection = () => {
-  return (
-    <div className="container col-10 text-center my-5 ">
-      <h2 style={{ marginBottom: '60px', marginTop:'120px', fontSize:'46px', fontWeight:'bold' }}>OUR SERVICES</h2>
-      <div className="row">
-        <div className="col-md-4"><div className="service-box">Individual Therapy</div></div>
-        <div className="col-md-4"><div className="service-box">Community space</div></div>
-        <div className="col-md-4"><div className="service-box">Gallery & articles</div></div>
-      </div>
-      <div className="row mt-5" style={{ marginBottom:'150px' }}>
-        <div className="col-md-4"><div className="service-box">Parenting Guidance</div></div>
-        <div className="col-md-4"><div className="service-box">Activities & Wellness</div></div>
-        <div className="col-md-4"><div className="service-box">Activities locations</div></div>
+   return (
+    <div className="image-gallery-container mb-5 mt-2">
+      <p className="tt mt-4 mb-4 fw-bold"> Why to choose Solidarity </p> 
+      <div className="image-grid">
+        <div className="image-item">
+          <img 
+            src={g11} 
+            alt="Gallery 1" 
+            className="gallery-image"
+            loading="lazy"
+          />
+        </div>
+        <div className="image-item">
+          <img 
+            src={g12}
+            alt="Gallery 2" 
+            className="gallery-image"
+            loading="lazy"
+          />
+        </div>
+        <div className="image-item">
+          <img 
+            src={g13}
+            alt="Gallery 3" 
+            className="gallery-image"
+            loading="lazy"
+          />
+        </div>
+        <div className="image-item">
+          <img 
+            src={g14}
+            alt="Gallery 4" 
+            className="gallery-image"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
   );
 };
+
 
 export default ServicesSection;

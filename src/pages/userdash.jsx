@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FaHome, FaCalendarAlt, FaClipboardList, FaEnvelope, FaBars, FaUserCircle, FaSignOutAlt, FaUserEdit } from "react-icons/fa";
+import { 
+  FaHome, 
+  FaCalendarAlt, 
+  FaEnvelope, 
+  FaBars, 
+  FaSignOutAlt, 
+  FaUserEdit,
+  FaGlobe  // Added new icon for public home
+} from "react-icons/fa";
 import "./userdash.css";
 
 const UserDash = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const sidebarRef = useRef(null);
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 
   const toggleSidebarVisibility = () => setIsSidebarVisible(!isSidebarVisible);
@@ -23,31 +31,31 @@ const navigate = useNavigate();
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
-const handleLogout = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    if (!token) return;
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
 
-    // Appeler l'API de déconnexion
-    const response = await fetch('https://deploy-back-3.onrender.com/api/auth/logout', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
+      // Appeler l'API de déconnexion
+      const response = await fetch('https://deploy-back-3.onrender.com/api/auth/logout', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
 
-    if (!response.ok) {
-      throw new Error('Échec de la déconnexion');
+      if (!response.ok) {
+        throw new Error('Échec de la déconnexion');
+      }
+      // Supprimer le localStorage et mettre à jour l'état après une réponse réussie
+      setIsLoggedIn(false);
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      navigate('/login', { replace: true });
+    } catch (error) {
+      console.error('Erreur lors de la déconnexion:', error);
     }
-    // Supprimer le localStorage et mettre à jour l'état après une réponse réussie
-    setIsLoggedIn(false);
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    navigate('/login', { replace: true });
-  } catch (error) {
-    console.error('Erreur lors de la déconnexion:', error);
-  }
-};
+  };
 
   return (
     <div className="user-dashboard-container">
@@ -63,6 +71,13 @@ const handleLogout = async () => {
           </div>
           
           <ul className="nav flex-column mt-3 flex-grow-1">
+            {/* New Public Home Link */}
+            <li className="nav-item">
+              <NavLink to="/" className="user-nav-link" onClick={closeSidebar}>
+                <FaGlobe className="me-2" /> Public Home
+              </NavLink>
+            </li>
+            
             <li className="nav-item">
               <NavLink to="overview" className="user-nav-link" onClick={closeSidebar}>
                 <FaHome className="me-2" /> Overview
@@ -74,16 +89,11 @@ const handleLogout = async () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="requests" className="user-nav-link" onClick={closeSidebar}>
-                <FaClipboardList className="me-2" /> Inquiries
-              </NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink to="communications" className="user-nav-link" onClick={closeSidebar}>
                 <FaEnvelope className="me-2" /> Communications
               </NavLink>
             </li>
-            {/* New Profile Menu Item */}
+            {/* Profile Menu Item */}
             <li className="nav-item">
               <NavLink to="profile" className="user-nav-link" onClick={closeSidebar}>
                 <FaUserEdit className="me-2" /> Profile
@@ -93,15 +103,15 @@ const handleLogout = async () => {
 
           {/* Profile Section at Bottom */}
           <div className="user-sidebar-profile p-4 border-top">
-                      <button 
-                        className="btn btn-danger w-100"
-                        onClick={handleLogout}
-                      >
-                        <FaSignOutAlt className="me-2" /> Sign Out
-                      </button>
-                    </div>
-                  </div>
-                </div>
+            <button 
+              className="btn btn-danger w-100"
+              onClick={handleLogout}
+            >
+              <FaSignOutAlt className="me-2" /> Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
 
       {/* Main Content */}
       <div className="user-main-content">

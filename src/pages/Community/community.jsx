@@ -275,9 +275,9 @@ const handleDiscuss = async (user) => {
               <FaPlus className="me-2" /> Add a Post
             </button>
             <hr className="divider" />
-            <p className="text-dark cursor-pointer" onClick={() => setShowFavoritesModal(true)}>Favorite Posts</p>
+            <p className="text-dark cu" onClick={() => setShowFavoritesModal(true)}>Favorite Posts</p>
             <p
-              className="text-dark cursor-pointer"
+              className="text-dark cu"
               onClick={() => {
                 setShowNotifications(true);
                 useCommunityStore.getState().fetchNotifications();

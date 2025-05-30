@@ -6,6 +6,7 @@ import EventsSection from "./EventsSection";
 import GallerySection from "./GallerySection";
 import FAQSection from "./FAQSection";
 import ChatBot from "./ChatBot"; 
+import Talk from "./Talk";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <TherapistSection />
       <EventsSection />
       <GallerySection />
+      <Talk />
       <FAQSection />
       <ChatBot /> 
     </div>

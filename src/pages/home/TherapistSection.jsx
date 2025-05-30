@@ -1,8 +1,15 @@
 import React from "react";
-import "./TherapistSection.css"; // Import the corresponding CSS file
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import "./TherapistSection.css";
 import h2 from "../../assets/h2.png";
 
 const TherapistSection = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
+  const handleConnectClick = () => {
+    navigate("/professionals"); // Navigate to professionals route
+  };
+
   return (
     <div className="therapist-section">
       <div className="container col-10">
@@ -18,8 +25,13 @@ const TherapistSection = () => {
             <p>
               Connect with professional therapists and coaches ready to support your growth, healing, and balance.
             </p>
-            {/* Book Now Button */}
-            <button className="book-now-btn mt-3">Book Now</button>
+            {/* Connect Now Button with navigation */}
+            <button 
+              className="book-now-btn mt-3"
+              onClick={handleConnectClick}
+            >
+              Connect Now
+            </button>
           </div>
         </div>
       </div>

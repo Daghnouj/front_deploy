@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./GallerySection.css";
 import galerie from "../../assets/galerie.png";
 
@@ -9,7 +10,9 @@ const GallerySection = () => {
         <h2 className="mb-5 text-white txt">Explore our Gallery</h2>
         <div className="gallery-container position-relative d-inline-block">
           <img src={galerie} alt="Gallery" className="gallery-image img-fluid mt-3 rounded" />
-          <button className="gallery-button position-absolute">View More</button>
+          <Link to="/galerie" className="gallery-button position-absolute text-white text-decoration-none">
+            View More
+          </Link>
         </div>
       </div>
     </div>

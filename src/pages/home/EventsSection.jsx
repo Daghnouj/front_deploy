@@ -1,3 +1,4 @@
+import React from "react";
 import "./EventsSection.css";
 import h1 from "../../assets/h3.png";
 import h2 from "../../assets/h4.png";
@@ -25,18 +26,19 @@ const EventsSpacesSection = () => {
           <img src={h2} alt="Exclusive event setup" className="event-image img-fluid" />
         </div>
         <div className="col-md">
-          <h3 className="event-home-title mx-5">Exclusive Events</h3>
-          <p className="event-text mx-5">
+          <h3 className="event-home-title mx-5 text-start">Exclusive Events</h3>
+          <p className="event-text mx-5 text-start">
           Browse nearby centers, gyms, or open spaces where you can participate in physical activities, therapy-friendly exercises, or group workshops tailored to your needs.
           </p>
         </div>
       </div>
 
       <div className="text-center mt-4">
-  <Link to="/activities-centres" className="explore-btn text-decoration-none d-inline-block">
+  <Link to="/sports" className="explore-btn text-decoration-none d-inline-block">
     Explore now
   </Link>
 </div>
+
     </div>
   );
 };

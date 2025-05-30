@@ -6,31 +6,33 @@ import logo from '../assets/logo.png';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
+  const role = localStorage.getItem('role'); 
 
-const handleLogout = async () => {
-  try {
-    const token = localStorage.getItem('token');
-    if (!token) return;
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) return;
 
-    // Appeler l'API de déconnexion
-    const response = await fetch('https://deploy-back-3.onrender.com/api/auth/logout', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-      },
-    });
+      // Call the logout API
+      const response = await fetch('https://deploy-back-3.onrender.com/api/auth/logout', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
 
-    if (!response.ok) {
-      throw new Error('Échec de la déconnexion');
+      if (!response.ok) {
+        throw new Error('Logout failed');
+      }
+
+      // Remove localStorage and update state after a successful response
+      setIsLoggedIn(false);
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+    } catch (error) {
+      console.error('Error during logout:', error);
     }
-    // Supprimer le localStorage et mettre à jour l'état après une réponse réussie
-    setIsLoggedIn(false);
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-  } catch (error) {
-    console.error('Erreur lors de la déconnexion:', error);
-  }
-};
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 fixed-top">
@@ -73,7 +75,7 @@ const handleLogout = async () => {
                       isActive ? "dropdown-item active" : "dropdown-item"
                     }
                   >
-                    A Propos
+                    About
                   </NavLink>
                 </li>
                 <li>
@@ -99,21 +101,37 @@ const handleLogout = async () => {
               </ul>
             </li>
 
+            {/* Lien conditionnel Reservation/Subscription */}
             <li className="nav-item">
-              <NavLink to="/Professionals" className={({ isActive }) => 
-                isActive ? "nav-link active" : "nav-link"
-              }>
-                Reservation
-              </NavLink>
+              {isLoggedIn && role === 'professional' ? (
+                <NavLink 
+                  to="/subscription" 
+                  className={({ isActive }) => 
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  Subscription
+                </NavLink>
+              ) : (
+                <NavLink 
+                  to="/Professionals" 
+                  className={({ isActive }) => 
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  Reservation
+                </NavLink>
+              )}
             </li>
+            
             <li className="nav-item">
               <NavLink to="/sports" className={({ isActive }) => 
                 isActive ? "nav-link active" : "nav-link"
               }>
-                Activities & Centres
+                Activities & Centers
               </NavLink>
             </li>
-            
+
             {/* Community Dropdown */}
             <li className="nav-item dropdown">
               <a
@@ -124,7 +142,7 @@ const handleLogout = async () => {
                 aria-expanded="false"
                 onClick={(e) => e.preventDefault()}
               >
-                Communauté & Ressources
+                Community & Resources
               </a>
               <ul className="dropdown-menu">
                 <li>
@@ -144,7 +162,7 @@ const handleLogout = async () => {
                       isActive ? "dropdown-item active" : "dropdown-item"
                     }
                   >
-                    Galerie
+                    Gallery
                   </NavLink>
                 </li>
               </ul>
