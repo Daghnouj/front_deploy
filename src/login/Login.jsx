@@ -87,7 +87,7 @@ const Login = () => {
   };
 
   const handleOAuthRedirect = (provider) => {
-    window.location.href = `https://deploy-back-3.onrender.com/api/auth/${provider}`;
+    window.location.href = `https://deploy-back-3.onrender.com/auth/${provider}`;
   };
 
   return (
