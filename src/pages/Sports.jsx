@@ -1,70 +1,125 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Carousel } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './SportsRooms.css';
-import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
+import i1 from "../assets/1.png";
+import i2 from "../assets/2.png";
+import i3 from "../assets/3.png";
+import i4 from "../assets/4.png";
+import i5 from "../assets/5.png";
+import i6 from "../assets/6.png";
+import i7 from "../assets/7.png";
+import i8 from "../assets/8.png";
+import i13 from "../assets/i13.jpeg";
+import i12 from "../assets/i12.jpeg";
+import i14 from "../assets/i14.jpeg";
+import i20 from "../assets/i20.jpeg";
 
-// Configuration Mapbox
-mapboxgl.accessToken = 'pk.eyJ1Ijoib21hcm5lZnppIiwiYSI6ImNtYjQ3azczNDFrdjkyanIwdm9mZHpjYW0ifQ.oM5jT9V4AYqjDYfZpY3Csw';
-
+import MapboxMap from"./MapboxMap";
 const TherapyRooms = () => {
   const [showLightbox, setShowLightbox] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [rooms, setRooms] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const mapContainer = useRef(null);
-  const map = useRef(null);
 
-  // Charger les salles depuis le backend
-  useEffect(() => {
-    const fetchRooms = async () => {
-      try {
-        const response = await fetch('https://deploy-back-3.onrender.com/api/events');
-        if (!response.ok) throw new Error('Erreur lors du chargement des salles');
-        const data = await response.json();
-        setRooms(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRooms();
-  }, []);
-
-  // Initialiser la carte avec les salles
-  useEffect(() => {
-    if (!mapContainer.current || rooms.length === 0) return;
-    
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [10, 34.5],
-      zoom: 5
-    });
-
-    // Ajouter des marqueurs pour chaque salle
-    map.current.on('load', () => {
-      rooms.forEach(room => {
-        if (!room.coordinates) return;
-        
-        const [lat, lng] = room.coordinates.split(',').map(Number);
-        if (isNaN(lat) || isNaN(lng)) return;
-        
-        new mapboxgl.Marker()
-          .setLngLat([lng, lat])
-          .setPopup(new mapboxgl.Popup().setText(room.name))
-          .addTo(map.current);
-      });
-    });
-
-    return () => map.current?.remove();
-  }, [rooms]);
+  const rooms = [
+    {
+      id: 1,
+      name: "Espace sassi sport",
+      images: [i20, i12, i13, i14],
+      address: "Manouba tunis ",
+      activities: [
+        { name: "football match", day: "Lundi-Vendredi" },
+        { name: "Yoga ", day: "Mardi/Jeudi" },
+        { name: "football match", day: "Mercredi" }
+      ],
+      description: "Espace Sassi Sport est un centre sportif moderne et polyvalent, conçu pour accueillir un large public désireux de pratiquer une activité physique dans un cadre convivial et bien équipé"
+    },
+    {
+      id: 2,
+      name: "Rollo space",
+      images: [i2, i2, i3, i4],
+      address: "Bardo, street  hbib bourgiba",
+      activities: [
+        { name: "Course à pied", day: "Quotidien" },
+        { name: "Cyclisme Indoor", day: "Lundi/Mercredi" },
+        { name: "Circuit Training", day: "Vendredi" }
+      ],
+      description: "ollo Space est un espace innovant et dynamique dédié à la glisse urbaine et au divertissement."
+    },
+    {
+      id: 3,
+      name: "Mind calm aouina",
+      images: [i3, i2, i3, i4],
+      address: "Laouina, 14 street  salema ",
+      activities: [
+        { name: "Yoga", day: "Lundi/Mercredi" },
+        { name: "Zumba", day: "Mardi/Jeudi" },
+        { name: "Pilates", day: "Vendredi" }
+      ],
+      description: "Mind Calm Aouina est un centre de bien-être et de développement personnel situé à Laouina, dédié à la détente du corps et de l’esprit."
+    },
+    {
+      id: 4,
+      name: "Sami Nefzi space ",
+      images: [i4, i2, i3, i4],
+      address: "Manouba , tunis",
+      activities: [
+        { name: "Stretching", day: "Tous les jours" },
+        { name: "Mobilité Articulaire", day: "Lundi/Vendredi" },
+        { name: "Relaxation", day: "Week-end" }
+      ],
+      description: "Sami Nefzi Space est un espace artistique et culturel unique dédié à la création contemporaine, à l’expression libre et à l’innovation visuelle."
+    },
+    {
+      id: 5,
+      name: "Your space bardo",
+      images: [i5, i2, i3, i4],
+      address: "O489+3XP,  Road, Tunis",
+      activities: [
+        { name: "Stretching", day: "Tous les jours" },
+        { name: "Mobilité Articulaire", day: "Lundi/Vendredi" },
+        { name: "Relaxation", day: "Week-end" }
+      ],
+      description: "Your Space Bardo est un centre moderne et polyvalent situé au cœur du Bardo, conçu pour vous offrir un lieu de détente, de remise en forme et de développement personnel."
+    },
+    {
+      id: 6,
+      name: "Lborak tunis",
+      images: [i6, i2, i3, i4],
+      address: "Bardo , street amal",
+      activities: [
+        { name: "Stretching", day: "Tous les jours" },
+        { name: "Mobilité Articulaire", day: "Lundi/Vendredi" },
+        { name: "Relaxation", day: "Week-end" }
+      ],
+      description: "Lborak Tunis est un espace dynamique dédié aux sports mécaniques, à la culture urbaine et à l’aventure."
+    },
+    {
+      id: 7,
+      name: "Espaci nasri ",
+      images: [i7, i2, i3, i4],
+      address: "El agba, street khayr edin",
+      activities: [
+        { name: "Stretching", day: "Tous les jours" },
+        { name: "Mobilité Articulaire", day: "Lundi/Vendredi" },
+        { name: "Relaxation", day: "Week-end" }
+      ],
+      description: "Espaci Nasri est un lieu polyvalent dédié à l’art, au design et à l’expression contemporaine."
+    },
+    {
+      id: 8,
+      name: "Espace Étirement",
+      images: [i8, i2, i3, i4],
+      address: "Menzah 6, street matouk",
+      activities: [
+        { name: "Stretching", day: "Tous les jours" },
+        { name: "Mobilité Articulaire", day: "Lundi/Vendredi" },
+        { name: "Relaxation", day: "Week-end" }
+      ],
+      description: "Espace Étirement est un lieu dédié au bien-être, à la mobilité et à la relaxation."
+    }
+  ];
 
   const handleImageClick = (room, index) => {
     setSelectedRoom(room);
@@ -84,14 +139,6 @@ const TherapyRooms = () => {
     );
   };
 
-  if (loading) {
-    return <div className="text-center py-5">Chargement en cours...</div>;
-  }
-
-  if (error) {
-    return <div className="alert alert-danger mx-auto my-5" style={{ maxWidth: '500px' }}>{error}</div>;
-  }
-
   return (
     <div className="sports-facilities-container" style={{ marginTop: '85px' }}>
       {/* Hero Banner */}
@@ -109,35 +156,46 @@ const TherapyRooms = () => {
       <main className="sports-main-content">
         <div className="container">
           <div className="row mb-4"> 
-            <div className="col-md-3"></div>
-            <div className="col-md-4">
-              <input
-                type="search"
-                className="form-control border-dark rounded-5"
-                placeholder="Rechercher des salles..."
-                aria-label="Search"
-              />
-            </div>
-            <div className="col-md-2">
-              <select className="form-select border-dark rounded-5">
-                <option value="">Filtrer par...</option>
-                <option value="sport">Type de sport</option>
-                <option value="price">Fourchette de prix</option>
-                <option value="rating">Évaluation</option>
-              </select>
-            </div>
-          </div>
-          
+      {/* Empty 3 columns */}
+      <div className="col-md-3"></div>
+      
+      {/* Search Bar - 4 columns */}
+      <div className="col-md-4">
+        <input
+          type="search"
+          className="form-control border-dark rounded-5"
+          placeholder="Search sports rooms..."
+          aria-label="Search"
+        />
+      </div>
+
+      {/* Filter Dropdown - 2 columns */}
+      <div className="col-md-2">
+        <select className="form-select border-dark rounded-5">
+          <option value="">Filter by...</option>
+          <option value="sport">Sport Type</option>
+          <option value="price">Price Range</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
+      
+      {/* Remaining 3 columns stay empty */}
+    </div>
           <div className="row g-4 sports-rooms-grid">
             {rooms.map((room) => (
-              <div key={room._id} className="col-md-6 col-lg-4 col-xl-3">
+              <div key={room.id} className="col-md-6 col-lg-4 col-xl-3">
                 <article className="sports-room-card rounded-5">
                   <div className="sports-room-image-container">
-                    <Carousel indicators={false} controls={false} interval={null}>
+                    <Carousel 
+                      indicators={false} 
+                      controls={false} 
+                      interval={null}
+                      pause={false}
+                    >
                       {room.images.map((img, index) => (
                         <Carousel.Item key={index}>
                           <img 
-                            src={`https://deploy-back-3.onrender.com/${img}`} 
+                            src={img} 
                             alt={room.name}
                             className="sports-room-image"
                             onClick={() => handleImageClick(room, index)}
@@ -154,19 +212,20 @@ const TherapyRooms = () => {
                       <span>{room.address}</span>
                     </div>
                     
+                    {/* Activities Section */}
                     <div className="sports-room-activities">
-                      <div className="sports-activities-scroller">
-                        {room.activities.map((activity, index) => (
-                          <div key={index} className="sports-activity-badge">
-                            <i className="bi bi-circle-fill sports-activity-bullet"></i>
-                            <div className="sports-activity-content">
-                              <span className="sports-activity-name">{activity.name}</span>
-                              <span className="sports-activity-day">{activity.day}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+  <div className="sports-activities-scroller">
+    {room.activities.map((activity, index) => (
+      <div key={index} className="sports-activity-badge">
+        <i className="bi bi-circle-fill sports-activity-bullet"></i>
+        <div className="sports-activity-content">
+          <span className="sports-activity-name">{activity.name}</span>
+          <span className="sports-activity-day">{activity.day}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
 
                     <p className="sports-room-description">{room.description}</p>
                   </div>
@@ -175,15 +234,16 @@ const TherapyRooms = () => {
             ))}
           </div>
         </div>
-        
         <div className='container mt-5'>
-          <h1 className='text-center mt-5 mb-5 text-black fw-bolder'>Trouvez des événements exclusifs à proximité</h1>
-          <div ref={mapContainer} style={{ height: '500px', width: '100%' }} />
+          <h1 className='text-center mt-5 mb-5 text-black fw-bolder'> Find exclusive events nearby</h1>
+        <MapboxMap></MapboxMap>
         </div>
+
+        
       </main>
 
-      {/* Lightbox */}
-      {showLightbox && selectedRoom && (
+      {/* Custom Lightbox */}
+      {showLightbox && (
         <div className="sports-lightbox">
           <div className="sports-lightbox-content">
             <button 
@@ -195,7 +255,7 @@ const TherapyRooms = () => {
             
             <div className="sports-lightbox-image-container">
               <img 
-                src={`https://deploy-back-3.onrender.com/${selectedRoom.images[currentImageIndex]}`} 
+                src={selectedRoom.images[currentImageIndex]} 
                 alt={selectedRoom.name}
                 className="sports-lightbox-image"
               />

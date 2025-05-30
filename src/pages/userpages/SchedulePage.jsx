@@ -29,7 +29,7 @@ const SchedulePage = () => {
           return;
         }
 
-        const response = await fetch('https://deploy-back-3.onrender.com/api/booking/user', {
+        const response = await fetch('http://localhost:5000/api/booking/user', {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -87,7 +87,7 @@ const SchedulePage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://deploy-back-3.onrender.com/api/booking/${id}/cancel`, {
+      const response = await fetch(`http://localhost:5000/api/booking/${id}/cancel`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -152,7 +152,7 @@ const SchedulePage = () => {
           <div className="header-content">
             <FaClipboardList className="header-icon" />
             <div>
-              <h3 className="section-title">My Requests</h3>
+              <h3 className="section-titles">My Requests</h3>
               <p className="card-subtitle">{activeRequests.length} active requests</p>
             </div>
           </div>
@@ -207,7 +207,7 @@ const SchedulePage = () => {
           <div className="header-content">
             <FaHistory className="header-icon" />
             <div>
-              <h3 className="section-title">Request History</h3>
+              <h3 className="section-titles">Request History</h3>
               <p className="card-subtitle">Past appointments</p>
             </div>
           </div>

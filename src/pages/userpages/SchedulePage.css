@@ -23,6 +23,7 @@
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  background: var(--background);
   min-height: 100vh;
 }
 
@@ -83,7 +84,7 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-.section-title {
+.section-titles {
   font-size: 1.4rem;
   margin: 0;
   font-weight: 600;
@@ -233,7 +234,7 @@
     font-size: 1.5rem;
   }
 
-  .section-title {
+  .section-titles {
     font-size: 1.2rem;
   }
 

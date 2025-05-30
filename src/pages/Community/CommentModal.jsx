@@ -175,7 +175,7 @@ const CommentModal = ({ show, handleClose, post, setSelectedPost }) => {
       show={show}
       onHide={handleClose}
       centered
-      size="lg"
+      
       backdropClassName="notification-backdrop"
       dialogClassName="comment-dialog"
       

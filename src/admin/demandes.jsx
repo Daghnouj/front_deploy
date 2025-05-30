@@ -196,7 +196,7 @@ const VerificationRequests = () => {
                 {selectedRequest && (
                   <>
                     <section className="mb-5">
-                      <h6 className="section-title"><FaUser className="me-2" />Professional</h6>
+                      <h6 className="section-titled"><FaUser className="me-2" />Professional</h6>
                       <div className="row g-3">
                         <div className="col-md-6">
                           <label className="form-label">Name</label>
@@ -210,7 +210,7 @@ const VerificationRequests = () => {
                     </section>
 
                     <section className="mb-5">
-                      <h6 className="section-title"><FaBook className="me-2" />Diploma</h6>
+                      <h6 className="section-titled"><FaBook className="me-2" />Diploma</h6>
                       <div className="row g-3">
                         <div className="col-md-6">
                           <label className="form-label">Diploma Title</label>
@@ -230,7 +230,7 @@ const VerificationRequests = () => {
                     </section>
 
                     <section className="mb-5">
-                      <h6 className="section-title"><FaBook className="me-2" />Institution</h6>
+                      <h6 className="section-titled"><FaBook className="me-2" />Institution</h6>
                       <div className="row">
                         <div className="col-12">
                           <label className="form-label">Institution Name</label>
@@ -240,7 +240,7 @@ const VerificationRequests = () => {
                     </section>
 
                     <section className="mb-5">
-                      <h6 className="section-title"><FaFileAlt className="me-2" />Documents</h6>
+                      <h6 className="section-titled"><FaFileAlt className="me-2" />Documents</h6>
                       <button 
                         className="btn btn-outline-primary"
                         onClick={() => handleDownload(
@@ -252,7 +252,7 @@ const VerificationRequests = () => {
                     </section>
 
                     <section>
-                      <h6 className="section-title"><FaCheckCircle className="me-2" />Validation</h6>
+                      <h6 className="section-titled"><FaCheckCircle className="me-2" />Validation</h6>
                       <div className="bg-light p-4 rounded-3">
                         <div className="mb-3">
                           <label className="form-label">Validation Comment</label>
