@@ -1,7 +1,7 @@
 // components/ProfessionalChatBot.jsx
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import "./Chatbot.css"; 
+import "./ChatBot.css"; 
 
 const predefinedQuestions = [
   "Détection précoce de la dépression ?",
