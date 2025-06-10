@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import "./location.css";
+import "./Location.css";
 
 const Location = () => {
   const [data, setData] = useState({
