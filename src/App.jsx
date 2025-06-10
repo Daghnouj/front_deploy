@@ -6,7 +6,6 @@ import Footer from "./components/Footer";
 import Home from "./pages/home/Home";
 import BookingForm from "./pages/BookingForm";
 import Login from "./login/Login";
-import SignUp from "./login/Signup";
 import Profdashboard from "./pages/prof";
 import Galerie from "./pages/profpages/Galerie";
 import Partenaires from "./pages/profpages/Partenaires";
@@ -50,6 +49,7 @@ import ResetPassword from "./admin/ResetPassword";
 import Logout from "./admin/Logout";
 import SubscriptionPage from "./pages/SubscriptionPage";
 import SuccessPage from "./pages/SuccessPage";
+import SignUp from "./login/Register";
 
 const MainLayout = ({ children }) => (
   <>
