@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
-import './Signup.css';
+import './SignUp.css';
 
 const Signup = () => {
   const [user, setUser] = useState({ name: '', email: '', password: '' });
