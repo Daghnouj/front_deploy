@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import './Calendar.css';
+import './calendar.css'; 
 
 const EventModal = ({ 
   isOpen, 

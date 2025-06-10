@@ -4,7 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import axios from 'axios';
 import EventModal from './EventModal';
-import './Calendar.css';
+import './calendar.css';
 
 const Calendar = () => {
   const [modalOpen, setModalOpen] = useState(false);
