@@ -4,7 +4,7 @@ import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import { CheckCircleFill, XCircleFill } from 'react-bootstrap-icons';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './AdminOverView.css';
+import './AdminOverview.css';
 
 ChartJS.register(...registerables);
 
