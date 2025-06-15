@@ -98,6 +98,16 @@ const Header = () => {
                     Professionals
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink 
+                    to="/test" 
+                    className={({ isActive }) => 
+                      isActive ? "dropdown-item active" : "dropdown-item"
+                    }
+                  >
+                    Mental Test
+                  </NavLink>
+                </li>
               </ul>
             </li>
 
@@ -164,6 +174,16 @@ const Header = () => {
                   >
                     Gallery
                   </NavLink>
+                </li>
+                   <li>
+                  <a 
+                    href="https://solidarity-mentalhealth.blogspot.com" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="dropdown-item"
+                  >
+                    Blog
+                  </a>
                 </li>
               </ul>
             </li>
