@@ -18,7 +18,7 @@ const TherapyRooms = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(''); // Added for search
+  const [searchTerm, setSearchTerm] = useState('');
   const mapContainer = useRef(null);
   const map = useRef(null);
 
@@ -40,7 +40,15 @@ const TherapyRooms = () => {
         const response = await fetch('https://deploy-back-3.onrender.com/api/events');
         if (!response.ok) throw new Error('Erreur lors du chargement des salles');
         const data = await response.json();
-        setRooms(data);
+        
+        // CORRECTION: Ajouter des valeurs par défaut pour les propriétés manquantes
+        const processedData = data.map(room => ({
+          ...room,
+          activities: room.activities || [],  // Tableau vide si activities est manquant
+          images: room.images || []           // Tableau vide si images est manquant
+        }));
+        
+        setRooms(processedData);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -88,7 +96,7 @@ const TherapyRooms = () => {
   const filteredRooms = rooms.filter(room => 
     room.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     room.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    room.activities.some(activity => 
+    (room.activities || []).some(activity => 
       activity.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
@@ -221,7 +229,7 @@ const TherapyRooms = () => {
                   <article className="sports-room-card rounded-5">
                     <div className="sports-room-image-container">
                       <Carousel indicators={false} controls={false} interval={null}>
-                        {room.images.map((img, index) => (
+                        {(room.images || []).map((img, index) => (
                           <Carousel.Item key={index}>
                             <img 
                               src={`https://deploy-back-3.onrender.com/${img}`} 
@@ -243,7 +251,8 @@ const TherapyRooms = () => {
                       
                       <div className="sports-room-activities">
                         <div className="sports-activities-scroller">
-                          {room.activities.map((activity, index) => (
+                          {/* CORRECTION: Utiliser un tableau vide si activities est undefined */}
+                          {(room.activities || []).map((activity, index) => (
                             <div key={index} className="sports-activity-badge">
                               <i className="bi bi-circle-fill sports-activity-bullet"></i>
                               <div className="sports-activity-content">

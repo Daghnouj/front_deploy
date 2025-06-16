@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Edit, Trash2, Eye, Calendar, MapPin } from 'lucide-react';
+import { Edit, Trash2, Eye, Calendar, MapPin, Globe, Tag } from 'lucide-react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -15,7 +15,7 @@ const getPhotoUrl = (photos) => {
   if (!photos || photos.length === 0) return null;
   return photos[0]?.startsWith('http') 
     ? photos[0] 
-    : `${import.meta.env.VITE_API_BASE_URL || 'https://deploy-back-3.onrender.com'}/${photos[0]}`;
+    : `https://deploy-back-3.onrender.com/${photos[0]}`;
 };
 
 // Fonction pour redimensionner une image
@@ -85,6 +85,8 @@ function Events() {
     address: '',
     coordinates: '',
     description: '',
+    website: '',
+    category: '',
     activities: [{ name: '', day: '' }]
   });
   const [newEventFiles, setNewEventFiles] = useState([]);
@@ -93,7 +95,14 @@ function Events() {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const eventsPerPage = 6;
-  const BASE_URL = `${import.meta.env.VITE_API_BASE_URL || 'https://deploy-back-3.onrender.com'}/api/events`;
+  const BASE_URL = `https://deploy-back-3.onrender.com/api/events`;
+
+  // Options pour la liste déroulante des catégories
+  const categoryOptions = [
+    { value: 'sport', label: 'Type de sport' },
+    { value: 'price', label: 'Fourchette de prix' },
+    { value: 'rating', label: 'Évaluation' }
+  ];
 
   const fetchEvents = useCallback(async () => {
     setIsLoading(true);
@@ -151,7 +160,7 @@ function Events() {
               console.error("Erreur de redimensionnement, utilisation de l'original", e);
               return file;
             })
-          ) // Correction: parenthèse ajoutée ici
+          )
         );
 
         const formData = new FormData();
@@ -161,6 +170,8 @@ function Events() {
         formData.append('address', newEvent.address);
         formData.append('coordinates', newEvent.coordinates);
         formData.append('description', newEvent.description);
+        formData.append('website', newEvent.website);
+        formData.append('category', newEvent.category);
         formData.append('activities', JSON.stringify(newEvent.activities));
         
         // Ajouter les fichiers redimensionnés
@@ -192,6 +203,8 @@ function Events() {
         formData.append('address', editData.address);
         formData.append('coordinates', editData.coordinates);
         formData.append('description', editData.description);
+        formData.append('website', editData.website);
+        formData.append('category', editData.category);
         formData.append('activities', JSON.stringify(editData.activities));
         
         // Redimensionner et ajouter les nouveaux fichiers s'il y en a
@@ -202,7 +215,7 @@ function Events() {
                 console.error("Erreur de redimensionnement, utilisation de l'original", e);
                 return file;
               })
-            ) // Correction: parenthèse ajoutée ici
+            )
           );
           
           resizedFiles.forEach(file => {
@@ -247,6 +260,8 @@ function Events() {
       address: '',
       coordinates: '',
       description: '',
+      website: '',
+      category: '',
       activities: [{ name: '', day: '' }]
     });
     setNewEventFiles([]);
@@ -339,6 +354,12 @@ function Events() {
     return activities.map(a => `${a.name} (${a.day})`).join(', ');
   };
 
+  // Trouver le libellé de la catégorie
+  const getCategoryLabel = (value) => {
+    const category = categoryOptions.find(opt => opt.value === value);
+    return category ? category.label : value;
+  };
+
   return (
     <Container className="admin-events-container py-5">
       <div className="admin-events-header d-flex justify-content-between align-items-center mb-5">
@@ -382,9 +403,9 @@ function Events() {
                         <small className="text-truncate">{event.address}</small>
                       </div>
                       <div className="d-flex align-items-center">
-                        <Calendar size={18} className="me-2" />
+                        <Tag size={18} className="me-2" />
                         <small className="text-truncate">
-                          {formatActivities(event.activities)}
+                          {getCategoryLabel(event.category) || 'Aucune catégorie'}
                         </small>
                       </div>
                     </div>
@@ -483,6 +504,31 @@ function Events() {
                 onChange={(e) => setNewEvent({...newEvent, coordinates: e.target.value})}
                 placeholder="Ex: 48.8566, 2.3522"
               />
+            </Form.Group>
+
+            <Form.Group className="admin-form-group mb-3">
+              <Form.Label className="admin-form-label">Site web</Form.Label>
+              <Form.Control
+                type="url"
+                value={newEvent.website}
+                onChange={(e) => setNewEvent({...newEvent, website: e.target.value})}
+                placeholder="https://exemple.com"
+              />
+            </Form.Group>
+
+            <Form.Group className="admin-form-group mb-3">
+              <Form.Label className="admin-form-label">Catégorie</Form.Label>
+              <Form.Select
+                value={newEvent.category}
+                onChange={(e) => setNewEvent({...newEvent, category: e.target.value})}
+              >
+                <option value="">Sélectionner une catégorie</option>
+                {categoryOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Select>
             </Form.Group>
 
             <Form.Group className="admin-form-group mb-3">
@@ -623,6 +669,22 @@ function Events() {
                   </div>
                 )}
 
+                {selectedEvent.website && (
+                  <div className="d-flex align-items-center">
+                    <Globe size={20} className="me-3" />
+                    <a href={selectedEvent.website} target="_blank" rel="noopener noreferrer">
+                      {selectedEvent.website}
+                    </a>
+                  </div>
+                )}
+
+                {selectedEvent.category && (
+                  <div className="d-flex align-items-center">
+                    <Tag size={20} className="me-3" />
+                    <span>{getCategoryLabel(selectedEvent.category)}</span>
+                  </div>
+                )}
+
                 <div className="d-flex align-items-start">
                   <Calendar size={20} className="me-3 mt-1" />
                   <div>
@@ -688,6 +750,31 @@ function Events() {
                   onChange={(e) => setEditData({...editData, coordinates: e.target.value})}
                   placeholder="Ex: 48.8566, 2.3522"
                 />
+              </Form.Group>
+
+              <Form.Group className="admin-form-group mb-3">
+                <Form.Label className="admin-form-label">Site web</Form.Label>
+                <Form.Control
+                  type="url"
+                  value={editData.website || ''}
+                  onChange={(e) => setEditData({...editData, website: e.target.value})}
+                  placeholder="https://exemple.com"
+                />
+              </Form.Group>
+
+              <Form.Group className="admin-form-group mb-3">
+                <Form.Label className="admin-form-label">Catégorie</Form.Label>
+                <Form.Select
+                  value={editData.category || ''}
+                  onChange={(e) => setEditData({...editData, category: e.target.value})}
+                >
+                  <option value="">Sélectionner une catégorie</option>
+                  {categoryOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </Form.Select>
               </Form.Group>
 
               <Form.Group className="admin-form-group mb-3">
