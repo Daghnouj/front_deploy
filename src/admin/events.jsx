@@ -11,15 +11,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './events.css';
 
-// Correction de la fonction getPhotoUrl
 const getPhotoUrl = (photos) => {
   if (!photos || photos.length === 0) return null;
-  
-  // Correction : vérifier si le chemin contient déjà l'URL de base
-  if (photos[0]?.includes('https://deploy-back-3.onrender.com/')) {
-    return photos[0];
-  }
-  
   return photos[0]?.startsWith('http') 
     ? photos[0] 
     : `https://deploy-back-3.onrender.com/${photos[0]}`;
@@ -40,6 +33,7 @@ const resizeImage = (file, maxWidth = 800, maxHeight = 600) => {
         let width = img.width;
         let height = img.height;
 
+        // Calculer les nouvelles dimensions en conservant le ratio
         if (width > maxWidth) {
           height = (height * maxWidth) / width;
           width = maxWidth;
@@ -68,7 +62,7 @@ const resizeImage = (file, maxWidth = 800, maxHeight = 600) => {
             }));
           },
           file.type || 'image/jpeg',
-          0.85
+          0.85 // Qualité de compression (0.85 = 85%)
         );
       };
       img.onerror = () => reject(new Error('Échec du chargement de l\'image'));
@@ -113,15 +107,10 @@ function Events() {
   const fetchEvents = useCallback(async () => {
     setIsLoading(true);
     try {
-      // CORRECTION CORS : suppression de l'en-tête Cache-Control
       const res = await axios.get(BASE_URL);
       setEvents(res.data);
     } catch (error) {
-      console.error("Error fetching events", {
-        message: error.message,
-        response: error.response?.data,
-        status: error.response?.status
-      });
+      console.error("Error fetching events", error);
     } finally {
       setIsLoading(false);
     }
@@ -131,7 +120,6 @@ function Events() {
     fetchEvents();
   }, [fetchEvents]);
 
-  // Correction de la validation des activités
   const validateForm = (formData, files, isNew = false) => {
     const newErrors = {};
     
@@ -139,32 +127,18 @@ function Events() {
     if (!formData.address?.trim()) newErrors.address = 'Adresse requise';
     if (!formData.description?.trim()) newErrors.description = 'Description requise';
     
-    // Validation des activités - nouvelle structure
+    // Validation des activités
     if (!formData.activities || formData.activities.length === 0) {
       newErrors.activities = 'Au moins une activité est requise';
     } else {
-      const activityErrors = {};
-      let hasError = false;
-      
       formData.activities.forEach((activity, index) => {
-        const activityError = {};
         if (!activity.name?.trim()) {
-          activityError.name = 'Nom activité requis';
-          hasError = true;
+          newErrors[`activityName_${index}`] = 'Nom activité requis';
         }
         if (!activity.day?.trim()) {
-          activityError.day = 'Jour activité requis';
-          hasError = true;
-        }
-        
-        if (Object.keys(activityError).length > 0) {
-          activityErrors[index] = activityError;
+          newErrors[`activityDay_${index}`] = 'Jour activité requis';
         }
       });
-      
-      if (hasError) {
-        newErrors.activities = activityErrors;
-      }
     }
     
     // Validation des images
@@ -176,9 +150,10 @@ function Events() {
     return Object.keys(newErrors).length === 0;
   };
 
- const handleAddEvent = async () => {
+  const handleAddEvent = async () => {
     if (validateForm(newEvent, newEventFiles, true)) {
       try {
+        // Redimensionner toutes les images avant envoi
         const resizedFiles = await Promise.all(
           newEventFiles.map(file => 
             resizeImage(file).catch(e => {
@@ -190,21 +165,18 @@ function Events() {
 
         const formData = new FormData();
         
+        // Ajouter les champs texte
         formData.append('name', newEvent.name);
         formData.append('address', newEvent.address);
         formData.append('coordinates', newEvent.coordinates);
         formData.append('description', newEvent.description);
         formData.append('website', newEvent.website);
         formData.append('category', newEvent.category);
+        formData.append('activities', JSON.stringify(newEvent.activities));
         
-        // CORRECTION : Envoyer les activités comme tableau JSON
-        newEvent.activities.forEach((activity, index) => {
-          formData.append(`activities[${index}][name]`, activity.name);
-          formData.append(`activities[${index}][day]`, activity.day);
-        });
-        
+        // Ajouter les fichiers redimensionnés
         resizedFiles.forEach(file => {
-          formData.append('photos', file);
+          formData.append('photo', file);
         });
 
         await axios.post(BASE_URL, formData, {
@@ -216,33 +188,26 @@ function Events() {
         setShowAdd(false);
         resetForms();
       } catch (error) {
-        console.error("Error creating event", {
-          message: error.message,
-          response: error.response?.data,
-          status: error.response?.status
-        });
+        console.error("Error creating event", error);
       }
     }
   };
 
- const handleEditEvent = async () => {
+  const handleEditEvent = async () => {
     if (validateForm(editData, editEventFiles)) {
       try {
         const formData = new FormData();
         
+        // Ajouter les champs texte
         formData.append('name', editData.name);
         formData.append('address', editData.address);
         formData.append('coordinates', editData.coordinates);
         formData.append('description', editData.description);
         formData.append('website', editData.website);
         formData.append('category', editData.category);
+        formData.append('activities', JSON.stringify(editData.activities));
         
-        // CORRECTION : Envoyer les activités comme tableau JSON
-        editData.activities.forEach((activity, index) => {
-          formData.append(`activities[${index}][name]`, activity.name);
-          formData.append(`activities[${index}][day]`, activity.day);
-        });
-        
+        // Redimensionner et ajouter les nouveaux fichiers s'il y en a
         if (editEventFiles.length > 0) {
           const resizedFiles = await Promise.all(
             editEventFiles.map(file => 
@@ -254,7 +219,7 @@ function Events() {
           );
           
           resizedFiles.forEach(file => {
-            formData.append('photos', file);
+            formData.append('photo', file);
           });
         }
 
@@ -267,11 +232,7 @@ function Events() {
         setShowEdit(false);
         resetForms();
       } catch (error) {
-        console.error("Error updating event", {
-          message: error.message,
-          response: error.response?.data,
-          status: error.response?.status
-        });
+        console.error("Error updating event", error);
       }
     }
   };
@@ -282,6 +243,7 @@ function Events() {
         await axios.delete(`${BASE_URL}/${id}`);
         await fetchEvents();
         
+        // Reset to first page if current page is empty
         const totalPages = Math.ceil((events.length - 1) / eventsPerPage);
         if (page > totalPages && totalPages > 0) {
           setPage(totalPages);
@@ -308,6 +270,7 @@ function Events() {
     setErrors({});
   };
 
+  // Gestion des activités
   const addActivity = (isNew = true) => {
     if (isNew) {
       setNewEvent({
@@ -322,26 +285,7 @@ function Events() {
     }
   };
 
-  // Correction : nettoyage des erreurs lors de la suppression
   const removeActivity = (index, isNew = true) => {
-    // Nettoyer les erreurs associées
-    setErrors(prev => {
-      const newErrors = {...prev};
-      
-      if (newErrors.activities) {
-        if (newErrors.activities[index]) {
-          delete newErrors.activities[index];
-        }
-        
-        // Supprimer l'objet d'erreurs s'il est vide
-        if (Object.keys(newErrors.activities).length === 0) {
-          delete newErrors.activities;
-        }
-      }
-      
-      return newErrors;
-    });
-
     if (isNew) {
       const updatedActivities = [...newEvent.activities];
       updatedActivities.splice(index, 1);
@@ -360,27 +304,6 @@ function Events() {
   };
 
   const handleActivityChange = (index, field, value, isNew = true) => {
-    // Nettoyer l'erreur spécifique
-    setErrors(prev => {
-      const newErrors = {...prev};
-      
-      if (newErrors.activities?.[index]) {
-        delete newErrors.activities[index][field];
-        
-        // Supprimer l'objet d'index s'il n'a plus d'erreurs
-        if (Object.keys(newErrors.activities[index]).length === 0) {
-          delete newErrors.activities[index];
-        }
-        
-        // Supprimer l'objet activities s'il est vide
-        if (Object.keys(newErrors.activities).length === 0) {
-          delete newErrors.activities;
-        }
-      }
-      
-      return newErrors;
-    });
-
     if (isNew) {
       const updatedActivities = [...newEvent.activities];
       updatedActivities[index][field] = value;
@@ -404,12 +327,14 @@ function Events() {
   const currentEvents = events.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(events.length / eventsPerPage);
 
+  // Handle page change
   const handlePageChange = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setPage(newPage);
     }
   };
 
+  // Pagination items
   const paginationItems = [];
   for (let i = 1; i <= totalPages; i++) {
     paginationItems.push(
@@ -423,11 +348,13 @@ function Events() {
     );
   }
 
+  // Formatteur d'activités pour l'affichage
   const formatActivities = (activities) => {
     if (!activities || activities.length === 0) return 'Aucune activité';
     return activities.map(a => `${a.name} (${a.day})`).join(', ');
   };
 
+  // Trouver le libellé de la catégorie
   const getCategoryLabel = (value) => {
     const category = categoryOptions.find(opt => opt.value === value);
     return category ? category.label : value;
@@ -666,13 +593,13 @@ function Events() {
                       placeholder="Nom de l'activité"
                       value={activity.name}
                       onChange={(e) => handleActivityChange(index, 'name', e.target.value, true)}
-                      isInvalid={errors.activities?.[index]?.name}
+                      isInvalid={!!errors[`activityName_${index}`]}
                     />
                     <Form.Control
                       placeholder="Jour (ex: Lundi 12 Juin)"
                       value={activity.day}
                       onChange={(e) => handleActivityChange(index, 'day', e.target.value, true)}
-                      isInvalid={errors.activities?.[index]?.day}
+                      isInvalid={!!errors[`activityDay_${index}`]}
                     />
                     <Button 
                       variant="outline-danger" 
@@ -682,21 +609,19 @@ function Events() {
                       Supprimer
                     </Button>
                   </div>
-                  
-                  {(errors.activities?.[index]?.name || errors.activities?.[index]?.day) && (
+                  {(errors[`activityName_${index}`] || errors[`activityDay_${index}`]) && (
                     <div className="d-flex gap-2 mb-2">
-                      {errors.activities[index].name && (
-                        <div className="text-danger small">{errors.activities[index].name}</div>
+                      {errors[`activityName_${index}`] && (
+                        <div className="text-danger small">{errors[`activityName_${index}`]}</div>
                       )}
-                      {errors.activities[index].day && (
-                        <div className="text-danger small">{errors.activities[index].day}</div>
+                      {errors[`activityDay_${index}`] && (
+                        <div className="text-danger small">{errors[`activityDay_${index}`]}</div>
                       )}
                     </div>
                   )}
                 </div>
               ))}
-              
-              {typeof errors.activities === 'string' && (
+              {errors.activities && (
                 <div className="text-danger">{errors.activities}</div>
               )}
             </Form.Group>
@@ -863,21 +788,14 @@ function Events() {
                   onChange={(e) => setEditEventFiles(Array.from(e.target.files))}
                 />
                 <div className="mt-2 d-flex flex-wrap gap-2">
-                  {editEventFiles.map((file, index) => {
-                    // Correction : gérer à la fois les fichiers et URLs
-                    const src = file instanceof File 
-                      ? URL.createObjectURL(file) 
-                      : getPhotoUrl([file]);
-                    
-                    return (
-                      <img 
-                        key={index}
-                        src={src}
-                        alt={`Preview ${index}`}
-                        className="img-preview"
-                      />
-                    );
-                  })}
+                  {editEventFiles.map((file, index) => (
+                    <img 
+                      key={index}
+                      src={URL.createObjectURL(file)}
+                      alt={`Preview ${index}`}
+                      className="img-preview"
+                    />
+                  ))}
                 </div>
                 <Form.Text className="text-muted">
                   Laisser vide pour conserver les images actuelles. Si vous changez, sélectionnez exactement 4 images (elles seront automatiquement redimensionnées).
@@ -917,13 +835,13 @@ function Events() {
                         placeholder="Nom de l'activité"
                         value={activity.name}
                         onChange={(e) => handleActivityChange(index, 'name', e.target.value, false)}
-                        isInvalid={errors.activities?.[index]?.name}
+                        isInvalid={!!errors[`activityName_${index}`]}
                       />
                       <Form.Control
                         placeholder="Jour (ex: Lundi 12 Juin)"
                         value={activity.day}
                         onChange={(e) => handleActivityChange(index, 'day', e.target.value, false)}
-                        isInvalid={errors.activities?.[index]?.day}
+                        isInvalid={!!errors[`activityDay_${index}`]}
                       />
                       <Button 
                         variant="outline-danger" 
@@ -933,21 +851,19 @@ function Events() {
                         Supprimer
                       </Button>
                     </div>
-                    
-                    {(errors.activities?.[index]?.name || errors.activities?.[index]?.day) && (
+                    {(errors[`activityName_${index}`] || errors[`activityDay_${index}`]) && (
                       <div className="d-flex gap-2 mb-2">
-                        {errors.activities[index].name && (
-                          <div className="text-danger small">{errors.activities[index].name}</div>
+                        {errors[`activityName_${index}`] && (
+                          <div className="text-danger small">{errors[`activityName_${index}`]}</div>
                         )}
-                        {errors.activities[index].day && (
-                          <div className="text-danger small">{errors.activities[index].day}</div>
+                        {errors[`activityDay_${index}`] && (
+                          <div className="text-danger small">{errors[`activityDay_${index}`]}</div>
                         )}
                       </div>
                     )}
                   </div>
                 ))}
-                
-                {typeof errors.activities === 'string' && (
+                {errors.activities && (
                   <div className="text-danger">{errors.activities}</div>
                 )}
               </Form.Group>
